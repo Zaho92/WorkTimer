@@ -1,0 +1,64 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:model="clr-namespace:WorkTimer.Model"
+    xmlns:viewModel="clr-namespace:WorkTimer.View.ViewModel">
+
+    <DataTemplate DataType="{x:Type model:TodayTimeModel}">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                Text="Heutige Arbeitszeit:" />
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalAlignment="Left"
+                Text="{Binding TodayWorkTime, StringFormat='{}{0:hh\\:mm\\:ss}'}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                Text="Heutige Pausenzeit:" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalAlignment="Left"
+                Text="{Binding TodayBreakTime, StringFormat='{}{0:hh\\:mm\\:ss}'}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModel:TodayTimeViewModel}">
+        <DockPanel Margin="20">
+            <ContentControl Margin="20,10" Content="{Binding Path=CurrentModel}" />
+            <DockPanel DockPanel.Dock="Top">
+                <Button
+                    Width="100"
+                    Margin="10,2"
+                    VerticalAlignment="Center"
+                    Command="{Binding Path=StartWorkStopwatchCommand}"
+                    Content="Start Work"
+                    DockPanel.Dock="Right"
+                    IsEnabled="{Binding Path=CanStartWorkStopwatchCommand}" />
+                <Button
+                    Width="100"
+                    Margin="10,2"
+                    VerticalAlignment="Center"
+                    Command="{Binding Path=StartBreakStopwatchCommand}"
+                    Content="Start Break"
+                    DockPanel.Dock="Right"
+                    IsEnabled="{Binding Path=CanStartBreakStopwatchCommand}" />
+            </DockPanel>
+        </DockPanel>
+    </DataTemplate>
+
+</ResourceDictionary>
