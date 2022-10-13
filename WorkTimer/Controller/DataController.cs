@@ -20,7 +20,14 @@ namespace WorkTimer.Controller
 
         public static void LoadData()
         {
-            //Alte Daten laden
+            if (Data.TodayJobTimer == null)
+            {
+                Data.TodayJobTimer = new JobTimerModel();
+            }
+            if (Data.PH_HistoryTimerData == null)
+            {
+                Data.PH_HistoryTimerData = new Dictionary<DateOnly, JobTimerModel>();
+            }
             if (Directory.Exists(DataPath))
             {
                 foreach (string filename in Directory.EnumerateFiles(DataPath))
@@ -47,16 +54,6 @@ namespace WorkTimer.Controller
                         throw; // TODO EXCEPTION-MANAGEMENT
                     }
                 }
-            }
-
-            // Wenn nichts gefunden wurde
-            if (Data.TodayJobTimer == null)
-            {
-                Data.TodayJobTimer = new JobTimerModel();
-            }
-            if (Data.PH_HistoryTimerData == null)
-            {
-                Data.PH_HistoryTimerData = new Dictionary<DateOnly, JobTimerModel>();
             }
         }
 

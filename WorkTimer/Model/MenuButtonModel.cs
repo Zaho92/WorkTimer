@@ -12,10 +12,10 @@ namespace WorkTimer.Model
     {
         public MenuButtonModel(string menuTitle, Page framePage, string? menuImageSource = null)
         {
-            _menuTitle = menuTitle;
-            _framePage = framePage;
-            _menuImageSource = menuImageSource ?? @"pack://application:,,,/Images/Icons/menu.ico";
-            _isSelected = false;
+            MenuTitle = menuTitle;
+            FramePage = framePage;
+            MenuImageSource = menuImageSource ?? @"/Images/Icons/menu-multi-size.ico";
+            IsSelected = false;
         }
 
         [ObservableProperty]

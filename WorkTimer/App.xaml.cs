@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms.VisualStyles;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;
 using WorkTimer.Controller;
 using WorkTimer.View.Windows;
+using WorkTimer.ViewModel;
 
 namespace WorkTimer
 {
@@ -17,16 +20,17 @@ namespace WorkTimer
     /// </summary>
     public partial class App : Application
     {
-        private TaskbarIcon? tb;
-        //private readonly TimerViewModel? tvm;
-
+        private TaskbarIcon taskBarIcon;
+        
         protected override void OnStartup(StartupEventArgs e)
         {
-            tb = (TaskbarIcon)FindResource("MyNotifyIcon") ?? throw new InvalidOperationException();
-            tb.Visibility = Visibility.Visible;
-            SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
             DataController.LoadData();
             TimerController.RunWorkTimer();
+
+            taskBarIcon = GetTaskbarIcon(); 
+            taskBarIcon.Visibility = Visibility.Visible;
+            SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
+
             base.OnStartup(e);
 
             FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata
@@ -35,9 +39,17 @@ namespace WorkTimer
             });
         }
 
+        private TaskbarIcon GetTaskbarIcon()
+        {
+            TaskbarIcon tb = (TaskbarIcon)FindResource("MyNotifyIcon") ?? throw new InvalidOperationException();
+            tb.DataContext = new NotifyIconViewModel();
+            return tb;
+        }
+
         protected override void OnExit(ExitEventArgs e)
         {
             DataController.SaveData();
+            taskBarIcon.Dispose();
             base.OnExit(e);
         }
 
@@ -52,5 +64,10 @@ namespace WorkTimer
                 TimerController.RunWorkTimer();
             }
         }
+
+        public void ShowBalloon(string text, string title = "Work Timer", BalloonIcon BallonType = BalloonIcon.Info)
+        {
+            taskBarIcon.ShowBalloonTip(title, text, BallonType);
+        }
     }
-}
+    }

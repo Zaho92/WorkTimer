@@ -47,7 +47,8 @@ namespace WorkTimer.Converter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotSupportedException("ConvertBack von \"WindowStateNormalToVisibilityConverter\" ist nicht erlaubt");
+            throw new NotSupportedException(
+                "ConvertBack von \"WindowStateNormalToVisibilityConverter\" ist nicht erlaubt");
         }
     }
 }

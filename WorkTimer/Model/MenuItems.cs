@@ -19,16 +19,16 @@ namespace WorkTimer.Model
         
         public MenuItems()
         {
-            if (_items == null || _items.Count == 0)
+            if (Items == null || Items.Count == 0)
             {
                 Items = new ObservableCollection<MenuButtonModel>()
                 {
                     new MenuButtonModel("Heute", new TodayWorkTimePage(),
-                        @"pack://application:,,,/Images/Icons/clock.ico"),
+                        @"/Images/Icons/stopwatch-multi-size.ico"),
                     new MenuButtonModel("Historie", new TodayWorkTimePage(),
-                        @"pack://application:,,,/Images/Icons/insight.ico"),
+                        @"/Images/Icons/calendar-multi-size.ico"),
                     new MenuButtonModel("Einstellungen", new TodayWorkTimePage(),
-                        @"pack://application:,,,/Images/Icons/settings.ico")
+                        @"/Images/Icons/settings-multi-size.ico")
                 };
             }
         }

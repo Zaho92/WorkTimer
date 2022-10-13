@@ -6,6 +6,7 @@
 
     <converter:WindowStateMaximizedToVisibilityConverter x:Key="WindowStateMaximizedToVisibilityConverter" />
     <converter:WindowStateNormalToVisibilityConverter x:Key="WindowStateNormalToVisibilityConverter" />
+    <converter:IconFileSizeSelectorConverter x:Key="IconFileSizeSelectorConverter" />
 
     <Style TargetType="{x:Type Window}">
         <Setter Property="WindowChrome.WindowChrome">
@@ -20,7 +21,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="FontFamily" Value="Calibri" />
-        <Setter Property="Icon" Value="../Images/Icons/AppIcon_White.ico" />
+        <Setter Property="Icon" Value="/Images/Icons/stopwatch-multi-size.ico" />
         <Setter Property="Title" Value="WorkTimer" />
         <Setter Property="Template">
             <Setter.Value>
@@ -62,7 +63,8 @@
                                     Margin="6,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Source="{TemplateBinding Icon}" />
+                                    Stretch="None"
+                                    Source="{TemplateBinding Icon, Converter={StaticResource IconFileSizeSelectorConverter}, ConverterParameter=16}" />
 
                                 <TextBlock
                                     Grid.Column="1"

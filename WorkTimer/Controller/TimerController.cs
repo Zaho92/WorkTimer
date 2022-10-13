@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 using WorkTimer.Model;
 
 namespace WorkTimer.Controller
 {
-    internal static class TimerController 
+    internal static class TimerController
     {
         public enum TimerType
         {
@@ -17,7 +19,7 @@ namespace WorkTimer.Controller
             WorkTimer,
             BreakTimer
         }
-
+         
         public static TimerType RunningTimer { get; private set; } = TimerType.None;
 
         public static void RunWorkTimer()

@@ -5,12 +5,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:WorkTimer.Model"
+    xmlns:tb="http://www.hardcodet.net/taskbar"
+    xmlns:converter="clr-namespace:WorkTimer.Converter"
     Width="1000"
     Height="600"
     MinWidth="800"
     MinHeight="450"
     Loaded="MainWindow_OnLoaded"
     mc:Ignorable="d">
+    <Window.Resources>
+        <converter:IconFileSizeSelectorConverter x:Key="IconFileSizeSelectorConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -42,7 +47,7 @@
                                     Margin="6,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
-                                    Source="{Binding MenuImageSource}" />
+                                    Source="{Binding MenuImageSource, Converter={StaticResource IconFileSizeSelectorConverter}, ConverterParameter=24}" />
                                 <TextBlock
                                     Grid.Column="1"
                                     HorizontalAlignment="Center"

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WorkTimer.Model;
 using WorkTimer.View.Pages;
-using Application = System.Windows.Forms.Application;
 
 namespace WorkTimer.View.Windows
 {

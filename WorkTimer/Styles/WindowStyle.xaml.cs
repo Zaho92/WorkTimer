@@ -41,10 +41,5 @@ namespace WorkTimer.Styles
             var window = (Window)((FrameworkElement)sender).TemplatedParent;
             window.WindowState = System.Windows.WindowState.Minimized;
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hello!");
-        }
     }
 }
