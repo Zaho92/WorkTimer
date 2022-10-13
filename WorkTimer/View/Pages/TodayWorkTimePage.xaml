@@ -4,11 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewmodel="clr-namespace:WorkTimer.View.ViewModel"
-    d:DataContext="{d:DesignInstance viewmodel:TodayTimeViewModel}"
+    xmlns:viewmodel="clr-namespace:WorkTimer.ViewModel"
+    d:DataContext="{d:DesignInstance viewmodel:TodayWorkTimeViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Loaded="TodayWorkTimePage_OnLoaded"
     mc:Ignorable="d">
     <Grid>
         <Grid x:Name="GridStartWorkTimers" />
@@ -42,7 +41,7 @@
                     FontSize="48"
                     FontStyle="Italic"
                     FontWeight="ExtraLight"
-                    Text="{Binding CurrentModel.TodayWorkTime, StringFormat='{}{0:hh\\:mm\\:ss}', FallbackValue=00:00:00}" />
+                    Text="{Binding WorkTimeString, FallbackValue=00:00:00}" />
             </Grid>
             <Grid Grid.Row="3" HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
@@ -66,7 +65,7 @@
                     FontSize="48"
                     FontStyle="Italic"
                     FontWeight="ExtraLight"
-                    Text="{Binding CurrentModel.TodayBreakTime, StringFormat='{}{0:hh\\:mm\\:ss}', FallbackValue=00:00:00}" />
+                    Text="{Binding BreakTimeString, FallbackValue=00:00:00}" />
             </Grid>
         </Grid>
     </Grid>

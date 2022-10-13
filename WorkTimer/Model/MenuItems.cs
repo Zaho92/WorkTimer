@@ -7,22 +7,15 @@ using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 using WorkTimer.View.Pages;
 
 namespace WorkTimer.Model
 {
-    internal class MenuItems : ObservableObject
+    internal partial class MenuItems : ObservableObject
     {
-        private readonly ObservableCollection<MenuButtonModel>? _items;
-        public new ObservableCollection<MenuButtonModel> Items
-        {
-            get => _items;
-            private init
-            {
-                _items = value;
-                OnPropertyChanged("Items");
-            }
-        }
+        [ObservableProperty]
+        private ObservableCollection<MenuButtonModel>? _items;
         
         public MenuItems()
         {
@@ -42,9 +35,11 @@ namespace WorkTimer.Model
 
         public bool SelectModel(MenuButtonModel buttonModel)
         {
+            if (Items == null) return false;
+
             MenuButtonModel? containingModel = Items.FirstOrDefault(bm => bm == buttonModel);
             if (containingModel == null) return false;
-            
+
             foreach (var buttonContent in Items)
             {
                 buttonContent.IsSelected = false;

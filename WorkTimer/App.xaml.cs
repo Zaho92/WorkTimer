@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;
-using WorkTimer.View.ViewModel;
+using WorkTimer.Controller;
 using WorkTimer.View.Windows;
 
 namespace WorkTimer
@@ -25,30 +25,32 @@ namespace WorkTimer
             tb = (TaskbarIcon)FindResource("MyNotifyIcon") ?? throw new InvalidOperationException();
             tb.Visibility = Visibility.Visible;
             SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
-
+            DataController.LoadData();
+            TimerController.RunWorkTimer();
             base.OnStartup(e);
 
             FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata
             {
                 DefaultValue = FindResource(typeof(Window))
             });
+        }
 
-            //TodayTimeWindow app = new TodayTimeWindow();
-            //TodayTimeViewModel context = new TodayTimeViewModel();
-            //app.DataContext = context;
-            //app.Show();
+        protected override void OnExit(ExitEventArgs e)
+        {
+            DataController.SaveData();
+            base.OnExit(e);
         }
 
         private void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
         {
-            //if (e.Reason == SessionSwitchReason.SessionLock)
-            //{
-            //    tvm?.StopWorking();
-            //}
-            //else if (e.Reason == SessionSwitchReason.SessionUnlock)
-            //{
-            //    tvm?.StartWorking();
-            //}
+            if (e.Reason == SessionSwitchReason.SessionLock)
+            {
+                TimerController.RunBreakTimer();
+            }
+            else if (e.Reason == SessionSwitchReason.SessionUnlock)
+            {
+                TimerController.RunWorkTimer();
+            }
         }
     }
 }
