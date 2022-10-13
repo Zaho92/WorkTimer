@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,26 +13,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WorkTimer.View.ViewModel;
+using WorkTimer.Model;
+using WorkTimer.ViewModel;
 
 namespace WorkTimer.View.Pages
 {
-    /// <summary>
-    /// Interaktionslogik für TodayWorkTimePage.xaml
-    /// </summary>
     public partial class TodayWorkTimePage : Page
     {
-        public int RandomValue { get; set; }
         public TodayWorkTimePage()
         {
             InitializeComponent();
-            this.DataContext = new TodayTimeViewModel();
-        }
-
-        private void TodayWorkTimePage_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            Random random = new Random();
-            RandomValue = random.Next();
+            this.DataContext = new TodayWorkTimeViewModel();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary
-    x:Class="WorkTimer.Resources.WindowStyle"
+    x:Class="WorkTimer.Styles.WindowStyle"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:WorkTimer.Converter">

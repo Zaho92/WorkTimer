@@ -10,7 +10,7 @@
                 <ResourceDictionary Source="Styles/ControlStyles.xaml" />
                 <ResourceDictionary Source="Styles/WindowStyle.xaml" />
                 <ResourceDictionary Source="Resources/NotifyIconResource.xaml" />
-                <ResourceDictionary Source="Resources/TodayTimeResources.xaml" />
+                <!--<ResourceDictionary Source="Resources/TodayTimeResources.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
