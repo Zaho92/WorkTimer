@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using WorkTimer.Controller;
 using WorkTimer.Helpers;
 using WorkTimer.Model;
@@ -12,6 +9,7 @@ internal partial class TodayWorkTimeViewModel : ObservableObject
 {
     [ObservableProperty]
     private string _workTimeString;
+
     [ObservableProperty]
     private string _breakTimeString;
 
@@ -32,9 +30,11 @@ internal partial class TodayWorkTimeViewModel : ObservableObject
                 case TimerController.TimerType.WorkTimer:
                     WorkTimeString = Helper.GetTimeStringFormSeconds((sender as SecondsCounter)?.Seconds ?? 0);
                     break;
+
                 case TimerController.TimerType.BreakTimer:
                     BreakTimeString = Helper.GetTimeStringFormSeconds((sender as SecondsCounter)?.Seconds ?? 0);
                     break;
+
                 default:
                     break;
             }

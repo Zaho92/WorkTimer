@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace WorkTimer.Controller;
 
@@ -13,7 +13,6 @@ public partial class SecondsCounter : ObservableObject
     private Task countTask;
 
     [ObservableProperty]
-    //[NotifyPropertyChangedFor(nameof(SecondsAsTimeSpan))]
     private int _seconds;
 
     public SecondsCounter()

@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Classes\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Images\Icons\break-multi-size.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

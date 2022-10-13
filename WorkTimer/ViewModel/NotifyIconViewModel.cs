@@ -1,12 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using CommunityToolkit.Mvvm.Input;
+using System.Windows;
 using WorkTimer.Controller;
 using WorkTimer.Helpers;
 using WorkTimer.Model;
@@ -15,13 +9,14 @@ namespace WorkTimer.ViewModel
 {
     internal partial class NotifyIconViewModel : ObservableObject
     {
-        [ObservableProperty] 
+        [ObservableProperty]
         private string _toolTipText;
+
         [ObservableProperty]
         private bool _canStartWorkTimer;
+
         [ObservableProperty]
         private bool _canStartBreakTimer;
-
 
         public NotifyIconViewModel()
         {
@@ -31,7 +26,7 @@ namespace WorkTimer.ViewModel
             Data.TodayJobTimer.WorkTime.PropertyChanged += SecondsCounter_PropertyChanged;
             Data.TodayJobTimer.BreakTime.PropertyChanged += SecondsCounter_PropertyChanged;
         }
-        
+
         private void SecondsCounter_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(SecondsCounter.Seconds))
@@ -50,9 +45,11 @@ namespace WorkTimer.ViewModel
                 case TimerController.TimerType.WorkTimer:
                     internalToolTipText += "Der Arbeits-Timer läuft momentan";
                     break;
+
                 case TimerController.TimerType.BreakTimer:
                     internalToolTipText += "Der Pause-Timer läuft momentan";
                     break;
+
                 default:
                     internalToolTipText += "Kein Timer läuft momentan";
                     break;
@@ -82,6 +79,5 @@ namespace WorkTimer.ViewModel
         {
             TimerController.RunBreakTimer();
         }
-
     }
 }

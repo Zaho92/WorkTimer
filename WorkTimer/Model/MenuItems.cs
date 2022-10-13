@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
 using WorkTimer.View.Pages;
 
 namespace WorkTimer.Model
@@ -16,7 +9,7 @@ namespace WorkTimer.Model
     {
         [ObservableProperty]
         private ObservableCollection<MenuButtonModel>? _items;
-        
+
         public MenuItems()
         {
             if (Items == null || Items.Count == 0)

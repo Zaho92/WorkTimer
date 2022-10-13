@@ -4,7 +4,6 @@ namespace WorkTimer.Styles
 {
     public partial class WindowStyle : ResourceDictionary
     {
-        
         public bool CanMaximize { get; set; } = true;
 
         public WindowStyle()

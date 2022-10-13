@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows;
 using WorkTimer.Model;
 
 namespace WorkTimer.Controller
@@ -13,7 +9,7 @@ namespace WorkTimer.Controller
     internal static class DataController
     {
         private static string DataPath => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\JobTimer\Data\";
-        
+
         private const string FileNameDateTemplate = "JobTimerData_{year}_{month}_{day}";
         private const string FileNameExtension = ".jtd";
         private static string FileNameTemplate => $"{FileNameDateTemplate}{FileNameExtension}";

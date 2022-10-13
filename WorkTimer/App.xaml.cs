@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms.VisualStyles;
-using Hardcodet.Wpf.TaskbarNotification;
+﻿using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;
+using System;
+using System.Windows;
 using WorkTimer.Controller;
-using WorkTimer.View.Windows;
 using WorkTimer.ViewModel;
 
 namespace WorkTimer
@@ -21,13 +13,13 @@ namespace WorkTimer
     public partial class App : Application
     {
         private TaskbarIcon taskBarIcon;
-        
+
         protected override void OnStartup(StartupEventArgs e)
         {
             DataController.LoadData();
             TimerController.RunWorkTimer();
 
-            taskBarIcon = GetTaskbarIcon(); 
+            taskBarIcon = GetTaskbarIcon();
             taskBarIcon.Visibility = Visibility.Visible;
             SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
 
@@ -70,4 +62,4 @@ namespace WorkTimer
             taskBarIcon.ShowBalloonTip(title, text, BallonType);
         }
     }
-    }
+}

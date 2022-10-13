@@ -1,4 +1,5 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Color x:Key="FontColor">#cfcfcf</Color>
     <SolidColorBrush x:Key="FontColorBrush" Color="{DynamicResource FontColor}" />
@@ -30,5 +31,4 @@
     <SolidColorBrush x:Key="ControlBorderPressedColorBrush" Color="{DynamicResource ControlBorderPressedColor}" />
     <Color x:Key="ControlBorderDisabledColor">#8a8a8a</Color>
     <SolidColorBrush x:Key="ControlBorderDisabledColorBrush" Color="{DynamicResource ControlBorderDisabledColor}" />
-
 </ResourceDictionary>
