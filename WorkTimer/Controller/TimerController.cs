@@ -7,6 +7,7 @@ namespace WorkTimer.Controller
         public enum TimerType
         {
             None,
+            UnknownTimer,
             WorkTimer,
             BreakTimer
         }
@@ -15,22 +16,40 @@ namespace WorkTimer.Controller
 
         public static void RunWorkTimer()
         {
-            if (RunningTimer != TimerType.WorkTimer)
-            {
-                Data.TodayJobTimer.BreakTime.Pause();
-                Data.TodayJobTimer.WorkTime.Run();
-                RunningTimer = TimerType.WorkTimer;
-            }
+            StartTimer(TimerType.WorkTimer);
         }
 
         public static void RunBreakTimer()
         {
-            if (RunningTimer != TimerType.BreakTimer)
+            StartTimer(TimerType.BreakTimer);
+        }
+
+        public static void RunUnknownTimer()
+        {
+            StartTimer(TimerType.UnknownTimer);
+        }
+
+        private static void StartTimer(TimerType timer)
+        {
+            if (RunningTimer == timer) return;
+            Data.TodayJobTimer.WorkTime.Pause();
+            Data.TodayJobTimer.BreakTime.Pause();
+            Data.UnknownTime.Pause();
+            switch (timer)
             {
-                Data.TodayJobTimer.WorkTime.Pause();
-                Data.TodayJobTimer.BreakTime.Run();
-                RunningTimer = TimerType.BreakTimer;
+                case TimerType.WorkTimer:
+                    Data.TodayJobTimer.WorkTime.Run();
+                    break;
+
+                case TimerType.BreakTimer:
+                    Data.TodayJobTimer.BreakTime.Run();
+                    break;
+
+                case TimerType.UnknownTimer:
+                    Data.UnknownTime.Run();
+                    break;
             }
+            RunningTimer = timer;
         }
     }
 }

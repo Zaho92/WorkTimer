@@ -63,8 +63,10 @@
                                     Margin="6,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Stretch="None"
-                                    Source="{TemplateBinding Icon, Converter={StaticResource IconFileSizeSelectorConverter}, ConverterParameter=16}" />
+                                    Source="{TemplateBinding Icon,
+                                                             Converter={StaticResource IconFileSizeSelectorConverter},
+                                                             ConverterParameter=16}"
+                                    Stretch="None" />
 
                                 <TextBlock
                                     Grid.Column="1"

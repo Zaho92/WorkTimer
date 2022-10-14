@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using WorkTimer.Model;
 
 namespace WorkTimer.Controller
 {
-    internal static class DataController
+    public static class DataController
     {
         private static string DataPath => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\JobTimer\Data\";
 
@@ -16,39 +15,29 @@ namespace WorkTimer.Controller
 
         public static void LoadData()
         {
-            if (Data.TodayJobTimer == null)
+            if (!Directory.Exists(DataPath)) return;
+            foreach (string filename in Directory.EnumerateFiles(DataPath))
             {
-                Data.TodayJobTimer = new JobTimerModel();
-            }
-            if (Data.PH_HistoryTimerData == null)
-            {
-                Data.PH_HistoryTimerData = new Dictionary<DateOnly, JobTimerModel>();
-            }
-            if (Directory.Exists(DataPath))
-            {
-                foreach (string filename in Directory.EnumerateFiles(DataPath))
+                if (!filename.EndsWith(FileNameExtension)) continue;
+                try
                 {
-                    if (!filename.EndsWith(FileNameExtension)) continue;
-                    try
+                    string jsonString = File.ReadAllText(filename);
+                    if (JsonSerializer.Deserialize(jsonString, typeof(JobTimerModel)) is JobTimerModel model)
                     {
-                        string jsonString = File.ReadAllText(filename);
-                        if (JsonSerializer.Deserialize(jsonString, typeof(JobTimerModel)) is JobTimerModel model)
+                        if (model.Date.Equals(DateTime.Today))
                         {
-                            if (model.Date.Equals(DateTime.Today))
-                            {
-                                Data.TodayJobTimer = model;
-                            }
-                            else
-                            {
-                                Data.PH_HistoryTimerData.Add(DateOnly.FromDateTime(model.Date), model);
-                            }
+                            Data.TodayJobTimer = model;
+                        }
+                        else
+                        {
+                            Data.PH_HistoryTimerData.Add(DateOnly.FromDateTime(model.Date), model);
                         }
                     }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        throw; // TODO EXCEPTION-MANAGEMENT
-                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw; // TODO EXCEPTION-MANAGEMENT
                 }
             }
         }
@@ -60,7 +49,6 @@ namespace WorkTimer.Controller
             {
                 Directory.CreateDirectory(DataPath);
             }
-
             try
             {
                 string filename = GetFileName(Data.TodayJobTimer.Date);

@@ -10,7 +10,9 @@ public partial class SecondsCounter : ObservableObject
     private readonly TimeSpan _interval;
 
     private bool _isRunning;
-    private Task countTask;
+    public bool IsRunning => _isRunning;
+
+    private Task? _countTask;
 
     [ObservableProperty]
     private int _seconds;
@@ -26,22 +28,23 @@ public partial class SecondsCounter : ObservableObject
     public void Run()
     {
         _isRunning = true;
-        countTask = new Task(StartCounting);
-        countTask.Start();
+        _countTask = new Task(StartCounting);
+        _countTask.Start();
     }
 
     public void Pause()
     {
         _isRunning = false;
-        if (countTask != null)
+        if (_countTask != null)
         {
-            countTask.Wait();
-            countTask.Dispose();
+            _countTask.Wait();
+            _countTask.Dispose();
         }
     }
 
     public void Reset()
     {
+        Pause();
         Seconds = 0;
     }
 
