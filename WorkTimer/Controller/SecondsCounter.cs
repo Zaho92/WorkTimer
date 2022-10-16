@@ -1,45 +1,45 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Timers;
 
 namespace WorkTimer.Controller;
 
+// Timer ist immer dann präziser wenn Start- und Stop-Signale nicht zu vollen 1000ms passieren (also in der realität).
+// Das alte Konzept war bei exaktem (<10 ms Abweichung) stoppen genauer.
+// Bei exaktem stoppen nach 2000ms kann in diesem Timer-Ansatz noch 1 Sekunde eingetragen sein, da das Enabled=false kurz vor dem Invoken des Events passiert.
+// Der Timer ist jedoch näher an der Realität: Wird nach 2212 ms gestoppt steht 2 Sekunden auf der Uhr.
+// Im alten Konzept wurde die Schleife noch durchlaufen bis zu Sekunde 3.
+// THY xUnit :D
+
 public partial class SecondsCounter : ObservableObject
 {
-    private readonly TimeSpan _interval;
+    public bool IsRunning => _timer.Enabled;
+    public TimeSpan SecondsAsTimeSpan => new(0, 0, Seconds);
+    public string SecondsAsTimeString => SecondsAsTimeSpan.ToString("c");
 
-    private bool _isRunning;
-    public bool IsRunning => _isRunning;
-
-    private Task? _countTask;
+    private System.Timers.Timer _timer;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(SecondsAsTimeSpan))]
+    [NotifyPropertyChangedFor(nameof(SecondsAsTimeString))]
     private int _seconds;
 
     public SecondsCounter()
     {
-        _interval = new TimeSpan(0, 0, 1);
-        _isRunning = false;
+        _timer = new System.Timers.Timer();
+        _timer.Enabled = false;
+        _timer.Interval = 1000;
+        _timer.Elapsed += _timer_Elapsed;
     }
-
-    //public TimeSpan SecondsAsTimeSpan => new(0, 0, Seconds);
 
     public void Run()
     {
-        _isRunning = true;
-        _countTask = new Task(StartCounting);
-        _countTask.Start();
+        _timer.Start();
     }
 
     public void Pause()
     {
-        _isRunning = false;
-        if (_countTask != null)
-        {
-            _countTask.Wait();
-            _countTask.Dispose();
-        }
+        _timer.Stop();
     }
 
     public void Reset()
@@ -48,14 +48,8 @@ public partial class SecondsCounter : ObservableObject
         Seconds = 0;
     }
 
-    private void StartCounting()
+    private void _timer_Elapsed(object? sender, ElapsedEventArgs e)
     {
-        var nextTick = DateTime.Now + _interval;
-        while (_isRunning)
-        {
-            while (DateTime.Now < nextTick) Thread.Sleep(nextTick - DateTime.Now);
-            nextTick += _interval;
-            Seconds++;
-        }
+        Seconds++;
     }
 }

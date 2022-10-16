@@ -56,8 +56,8 @@ namespace WorkTimer.ViewModel
             }
             internalToolTipText += "\n\n";
 
-            internalToolTipText += $"Arbeitszeit: {Helper.GetTimeStringFormSeconds(Data.TodayJobTimer.WorkTime.Seconds)}\n";
-            internalToolTipText += $"Pausenzeit: {Helper.GetTimeStringFormSeconds(Data.TodayJobTimer.BreakTime.Seconds)}\n";
+            internalToolTipText += $"Arbeitszeit: {Data.TodayJobTimer.WorkTime.SecondsAsTimeString}\n";
+            internalToolTipText += $"Pausenzeit: {Data.TodayJobTimer.BreakTime.SecondsAsTimeString}\n";
 
             return internalToolTipText;
         }

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows.Media;
 using WorkTimer.Controller;
 using WorkTimer.Helpers;
 using WorkTimer.Model;
@@ -15,8 +16,8 @@ internal partial class TodayWorkTimeViewModel : ObservableObject
 
     public TodayWorkTimeViewModel()
     {
-        WorkTimeString = Helper.GetTimeStringFormSeconds(Data.TodayJobTimer.WorkTime.Seconds);
-        BreakTimeString = Helper.GetTimeStringFormSeconds(Data.TodayJobTimer.BreakTime.Seconds);
+        WorkTimeString = Data.TodayJobTimer.WorkTime.SecondsAsTimeString;
+        BreakTimeString = Data.TodayJobTimer.BreakTime.SecondsAsTimeString;
         Data.TodayJobTimer.WorkTime.PropertyChanged += SecondsCounter_PropertyChanged;
         Data.TodayJobTimer.BreakTime.PropertyChanged += SecondsCounter_PropertyChanged;
     }
@@ -28,11 +29,11 @@ internal partial class TodayWorkTimeViewModel : ObservableObject
             switch (TimerController.RunningTimer)
             {
                 case TimerController.TimerType.WorkTimer:
-                    WorkTimeString = Helper.GetTimeStringFormSeconds((sender as SecondsCounter)?.Seconds ?? 0);
+                    WorkTimeString = (sender as SecondsCounter)?.SecondsAsTimeString;
                     break;
 
                 case TimerController.TimerType.BreakTimer:
-                    BreakTimeString = Helper.GetTimeStringFormSeconds((sender as SecondsCounter)?.Seconds ?? 0);
+                    BreakTimeString = (sender as SecondsCounter)?.SecondsAsTimeString;
                     break;
 
                 default:
