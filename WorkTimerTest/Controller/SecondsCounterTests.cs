@@ -61,7 +61,7 @@ namespace WorkTimerTest.Controller
             // Act
             secondsCounter.Run();
             // Etwas Puffer: Bei exaktem stoppen nach 2000ms kann in diesem Timer-Ansatz noch 1 Sekunde eingetragen sein, da das Enabled=false dann kurz vor dem Invoken des Events passiert.
-            // Da das kein realistischer Fall ist geben wir einen kleinen Puffer. Nach den 20ms sollte die korrekte Sekundenzahl eingetragen sein.
+            // Da das kein realistischer Fall ist, geben wir einen kleinen Puffer. Nach den 20ms sollte die korrekte Sekundenzahl eingetragen sein.
             Thread.Sleep(ms + 20);
             secondsCounter.Pause();
 

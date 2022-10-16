@@ -4,12 +4,11 @@ using System.Timers;
 
 namespace WorkTimer.Controller;
 
-// Timer ist immer dann präziser wenn Start- und Stop-Signale nicht zu vollen 1000ms passieren (also in der realität).
-// Das alte Konzept war bei exaktem (<10 ms Abweichung) stoppen genauer.
-// Bei exaktem stoppen nach 2000ms kann in diesem Timer-Ansatz noch 1 Sekunde eingetragen sein, da das Enabled=false kurz vor dem Invoken des Events passiert.
-// Der Timer ist jedoch näher an der Realität: Wird nach 2212 ms gestoppt steht 2 Sekunden auf der Uhr.
+// Timer ist immer dann präziser, wenn Start- und Stop-Signale nicht zu vollen 1000ms passieren (also in der Realität).
+// Das alte Konzept war bei exaktem stoppen (<10 ms Abweichung) genauer.
+// Bei exaktem stoppen nach 2000ms kann in diesem Timer-Ansatz noch 1 Sekunde eingetragen sein, da dann das Enabled=false kurz vor dem Invoken des Events passiert.
+// Der Timer ist jedoch näher an der Realität: Wird z.B. nach 2212 ms gestoppt, steht 2 Sekunden auf der Uhr.
 // Im alten Konzept wurde die Schleife noch durchlaufen bis zu Sekunde 3.
-// THY xUnit :D
 
 public partial class SecondsCounter : ObservableObject
 {
