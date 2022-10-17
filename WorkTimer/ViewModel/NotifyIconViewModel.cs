@@ -2,8 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Windows;
 using WorkTimer.Controller;
-using WorkTimer.Helpers;
 using WorkTimer.Model;
+using WorkTimer.View.Windows;
 
 namespace WorkTimer.ViewModel
 {
@@ -12,42 +12,48 @@ namespace WorkTimer.ViewModel
         [ObservableProperty]
         private string _toolTipText;
 
-        [ObservableProperty]
-        private bool _canStartWorkTimer;
-
-        [ObservableProperty]
-        private bool _canStartBreakTimer;
+        public bool CanStartWorkTimer => TimerController.RunningTimer != TimerController.TimerType.WorkTimer;
+        public bool CanStartBreakTimer => TimerController.RunningTimer != TimerController.TimerType.BreakTimer;
+        public bool CanStopTimers => TimerController.RunningTimer != TimerController.TimerType.None;
 
         public NotifyIconViewModel()
         {
-            ToolTipText = GetToolTipText();
-            CanStartWorkTimer = TimerController.RunningTimer != TimerController.TimerType.WorkTimer;
-            CanStartBreakTimer = TimerController.RunningTimer != TimerController.TimerType.BreakTimer;
-            Data.TodayJobTimer.WorkTime.PropertyChanged += SecondsCounter_PropertyChanged;
-            Data.TodayJobTimer.BreakTime.PropertyChanged += SecondsCounter_PropertyChanged;
+            TimerController.StaticPropertyChanged += TimerController_StaticPropertyChanged;
+            Data.TodayJobTimer.WorkTime.PropertyChanged += Timer_PropertyChanged;
+            Data.TodayJobTimer.BreakTime.PropertyChanged += Timer_PropertyChanged;
         }
 
-        private void SecondsCounter_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Timer_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            // TODO Sekündliche Updates sind sicher nicht performant aber ein workaround solang die Interaction.Triggers nicht funktionieren
             if (e.PropertyName == nameof(SecondsCounter.Seconds))
             {
-                ToolTipText = GetToolTipText();
-                CanStartWorkTimer = TimerController.RunningTimer != TimerController.TimerType.WorkTimer;
-                CanStartBreakTimer = TimerController.RunningTimer != TimerController.TimerType.BreakTimer;
+                RefreshToolTipText();
             }
         }
 
-        private string GetToolTipText()
+        private void TimerController_StaticPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(TimerController.RunningTimer))
+            {
+                OnPropertyChanged(nameof(CanStartWorkTimer));
+                OnPropertyChanged(nameof(CanStartBreakTimer));
+                OnPropertyChanged(nameof(CanStopTimers));
+            }
+        }
+
+        [RelayCommand]
+        public void RefreshToolTipText()
         {
             string internalToolTipText = "";
             switch (TimerController.RunningTimer)
             {
                 case TimerController.TimerType.WorkTimer:
-                    internalToolTipText += "Der Arbeits-Timer läuft momentan";
+                    internalToolTipText += "Du Arbeitest momentan";
                     break;
 
                 case TimerController.TimerType.BreakTimer:
-                    internalToolTipText += "Der Pause-Timer läuft momentan";
+                    internalToolTipText += "Du machst momentan Pause";
                     break;
 
                 default:
@@ -59,13 +65,17 @@ namespace WorkTimer.ViewModel
             internalToolTipText += $"Arbeitszeit: {Data.TodayJobTimer.WorkTime.SecondsAsTimeString}\n";
             internalToolTipText += $"Pausenzeit: {Data.TodayJobTimer.BreakTime.SecondsAsTimeString}\n";
 
-            return internalToolTipText;
+            ToolTipText = internalToolTipText;
         }
 
         [RelayCommand]
-        public void ExitApplication()
+        public void OpenMainWindow()
         {
-            Application.Current.Shutdown();
+            if (!(Application.Current.MainWindow?.Activate() ?? false))
+            {
+                Application.Current.MainWindow = new MainWindow();
+                Application.Current.MainWindow.Show();
+            }
         }
 
         [RelayCommand]
@@ -78,6 +88,18 @@ namespace WorkTimer.ViewModel
         public void StartBreakTimer()
         {
             TimerController.RunBreakTimer();
+        }
+
+        [RelayCommand]
+        public void StopAllTimers()
+        {
+            TimerController.StopAllTimers();
+        }
+
+        [RelayCommand]
+        public void ExitApplication()
+        {
+            Application.Current.Shutdown();
         }
     }
 }

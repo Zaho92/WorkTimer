@@ -11,7 +11,9 @@
     <None Remove="Images\Icons\break-multi-size.ico" />
     <None Remove="Images\Icons\calendar-multi-size.ico" />
     <None Remove="Images\Icons\close-multi-size.ico" />
+    <None Remove="Images\Icons\home-multi-size.ico" />
     <None Remove="Images\Icons\menu-multi-size.ico" />
+    <None Remove="Images\Icons\pause-multi-size.ico" />
     <None Remove="Images\Icons\settings-multi-size.ico" />
     <None Remove="Images\Icons\stopwatch-multi-size.ico" />
     <None Remove="Images\Icons\work-multi-size.ico" />
@@ -20,6 +22,7 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,7 +35,13 @@
     <Resource Include="Images\Icons\close-multi-size.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Icons\home-multi-size.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Icons\menu-multi-size.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\pause-multi-size.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Icons\settings-multi-size.ico">

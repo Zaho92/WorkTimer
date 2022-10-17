@@ -1,9 +1,19 @@
-﻿using WorkTimer.Model;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using CommunityToolkit.Mvvm.ComponentModel;
+using WorkTimer.Model;
 
 namespace WorkTimer.Controller
 {
     internal static class TimerController
     {
+        public static event PropertyChangedEventHandler StaticPropertyChanged;
+
+        private static void NotifyStaticPropertyChanged([CallerMemberName] string name = null)
+        {
+            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
+        }
+
         public enum TimerType
         {
             None,
@@ -12,7 +22,23 @@ namespace WorkTimer.Controller
             BreakTimer
         }
 
-        public static TimerType RunningTimer { get; private set; } = TimerType.None;
+        private static TimerType _runningTimer = TimerType.None;
+
+        public static TimerType RunningTimer
+        {
+            get
+            {
+                return _runningTimer;
+            }
+            private set
+            {
+                if (value != _runningTimer)
+                {
+                    _runningTimer = value;
+                    NotifyStaticPropertyChanged();
+                }
+            }
+        }
 
         public static void RunWorkTimer()
         {
@@ -29,12 +55,18 @@ namespace WorkTimer.Controller
             StartTimer(TimerType.UnknownTimer);
         }
 
-        private static void StartTimer(TimerType timer)
+        public static void StopAllTimers()
         {
-            if (RunningTimer == timer) return;
             Data.TodayJobTimer.WorkTime.Pause();
             Data.TodayJobTimer.BreakTime.Pause();
             Data.UnknownTime.Pause();
+            RunningTimer = TimerType.None;
+        }
+
+        private static void StartTimer(TimerType timer)
+        {
+            if (RunningTimer == timer) return;
+            StopAllTimers();
             switch (timer)
             {
                 case TimerType.WorkTimer:
