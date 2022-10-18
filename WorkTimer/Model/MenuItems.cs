@@ -18,8 +18,8 @@ namespace WorkTimer.Model
                 {
                     new MenuButtonModel("Heute", new TodayWorkTimePage(),
                         @"/Images/Icons/stopwatch-multi-size.ico"),
-                    new MenuButtonModel("Historie", new TodayWorkTimePage(),
-                        @"/Images/Icons/calendar-multi-size.ico"),
+                    new MenuButtonModel("Statistiken", new TodayWorkTimePage(),
+                        @"/Images/Icons/statistics-multi-size.ico"),
                     new MenuButtonModel("Einstellungen", new TodayWorkTimePage(),
                         @"/Images/Icons/settings-multi-size.ico")
                 };

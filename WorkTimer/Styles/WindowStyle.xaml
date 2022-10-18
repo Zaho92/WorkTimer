@@ -3,11 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:WorkTimer.Converter">
-
-    <converter:WindowStateMaximizedToVisibilityConverter x:Key="WindowStateMaximizedToVisibilityConverter" />
-    <converter:WindowStateNormalToVisibilityConverter x:Key="WindowStateNormalToVisibilityConverter" />
+    <converter:WindowMinimizeButtonVisibilityConverter x:Key="WindowMinimizeButtonVisibilityConverter" />
+    <converter:WindowMaximizeButtonVisibilityConverter x:Key="WindowMaximizeButtonVisibilityConverter" />
+    <converter:WindowRestoreButtonVisibilityConverter x:Key="WindowRestoreButtonVisibilityConverter" />
     <converter:IconFileSizeSelectorConverter x:Key="IconFileSizeSelectorConverter" />
-
     <Style TargetType="{x:Type Window}">
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
@@ -82,7 +81,8 @@
                                     <Button
                                         x:Name="btnMinimize"
                                         VerticalContentAlignment="Bottom"
-                                        Click="MinimizeClick"
+                                        Click="MinimizeClick" 
+                                        Visibility="{Binding Converter={StaticResource WindowMinimizeButtonVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                                         Style="{DynamicResource CustomWindowTitleButtonStyle}">
                                         <Path
                                             Width="10"
@@ -97,7 +97,7 @@
                                         x:Name="btnMaximize"
                                         Click="MaximizeClick"
                                         Style="{DynamicResource CustomWindowTitleButtonStyle}"
-                                        Visibility="{Binding WindowState, Converter={StaticResource WindowStateNormalToVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}">
+                                        Visibility="{Binding Converter={StaticResource WindowMaximizeButtonVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}">
                                         <Path
                                             Width="10"
                                             Height="10"
@@ -111,7 +111,7 @@
                                         x:Name="btnRestore"
                                         Click="RestoreClick"
                                         Style="{DynamicResource CustomWindowTitleButtonStyle}"
-                                        Visibility="{Binding WindowState, Converter={StaticResource WindowStateMaximizedToVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}">
+                                        Visibility="{Binding Converter={StaticResource WindowRestoreButtonVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}">
                                         <Path
                                             Width="10"
                                             Height="10"

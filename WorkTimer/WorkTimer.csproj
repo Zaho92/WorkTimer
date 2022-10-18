@@ -8,15 +8,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Icons\alarm-multi-size.ico" />
     <None Remove="Images\Icons\break-multi-size.ico" />
     <None Remove="Images\Icons\calendar-multi-size.ico" />
     <None Remove="Images\Icons\close-multi-size.ico" />
+    <None Remove="Images\Icons\error-multi-size.ico" />
     <None Remove="Images\Icons\home-multi-size.ico" />
+    <None Remove="Images\Icons\info-multi-size.ico" />
     <None Remove="Images\Icons\menu-multi-size.ico" />
     <None Remove="Images\Icons\pause-multi-size.ico" />
+    <None Remove="Images\Icons\question-multi-size.ico" />
     <None Remove="Images\Icons\settings-multi-size.ico" />
+    <None Remove="Images\Icons\statistics-multi-size.ico" />
     <None Remove="Images\Icons\stopwatch-multi-size.ico" />
+    <None Remove="Images\Icons\warning-multi-size.ico" />
     <None Remove="Images\Icons\work-multi-size.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Icons\alarm-multi-size.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -35,7 +47,13 @@
     <Resource Include="Images\Icons\close-multi-size.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Icons\error-multi-size.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Icons\home-multi-size.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\info-multi-size.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Icons\menu-multi-size.ico">
@@ -44,10 +62,19 @@
     <Resource Include="Images\Icons\pause-multi-size.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Icons\question-multi-size.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Icons\settings-multi-size.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Icons\statistics-multi-size.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Icons\stopwatch-multi-size.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\warning-multi-size.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Icons\work-multi-size.ico">

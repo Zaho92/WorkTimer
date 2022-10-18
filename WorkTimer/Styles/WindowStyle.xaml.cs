@@ -1,11 +1,10 @@
 ﻿using System.Windows;
+using static System.Windows.Forms.AxHost;
 
 namespace WorkTimer.Styles
 {
     public partial class WindowStyle : ResourceDictionary
     {
-        public bool CanMaximize { get; set; } = true;
-
         public WindowStyle()
         {
             InitializeComponent();

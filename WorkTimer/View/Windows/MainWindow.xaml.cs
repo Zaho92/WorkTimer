@@ -5,9 +5,6 @@ using WorkTimer.Model;
 
 namespace WorkTimer.View.Windows
 {
-    /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private readonly MenuItems _thisMenuItems;

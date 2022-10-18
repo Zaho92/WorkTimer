@@ -25,7 +25,7 @@ namespace WorkTimer
     public partial class App : Application
     {
         private TaskbarIcon taskBarIcon;
-
+        
         protected override void OnStartup(StartupEventArgs e)
         {
             DataController.LoadData();
