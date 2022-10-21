@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Windows;
 using WorkTimer.Controller;
 using WorkTimer.Model;
+using WorkTimer.Services;
 using WorkTimer.View.Windows;
 
 namespace WorkTimer.ViewModel
@@ -18,28 +19,21 @@ namespace WorkTimer.ViewModel
 
         public NotifyIconViewModel()
         {
-            TimerController.StaticPropertyChanged += TimerController_StaticPropertyChanged;
-            Data.TodayJobTimer.WorkTime.PropertyChanged += Timer_PropertyChanged;
-            Data.TodayJobTimer.BreakTime.PropertyChanged += Timer_PropertyChanged;
+            TimerController.RunningTimerChanged += TimerController_RunningTimerChanged;
+            SecondsNotifier.SecondTick += SecondsNotifier_SecondTick;
         }
 
-        private void Timer_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void TimerController_RunningTimerChanged(object? sender, TimerController.TimerType e)
+        {
+            OnPropertyChanged(nameof(CanStartWorkTimer));
+            OnPropertyChanged(nameof(CanStartBreakTimer));
+            OnPropertyChanged(nameof(CanStopTimers));
+        }
+
+        private void SecondsNotifier_SecondTick(object? sender, System.DateTime e)
         {
             // TODO Sekündliche Updates sind sicher nicht performant aber ein workaround solang die Interaction.Triggers nicht funktionieren
-            if (e.PropertyName == nameof(SecondsCounter.Seconds))
-            {
-                RefreshToolTipText();
-            }
-        }
-
-        private void TimerController_StaticPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(TimerController.RunningTimer))
-            {
-                OnPropertyChanged(nameof(CanStartWorkTimer));
-                OnPropertyChanged(nameof(CanStartBreakTimer));
-                OnPropertyChanged(nameof(CanStopTimers));
-            }
+            RefreshToolTipText();
         }
 
         [RelayCommand]

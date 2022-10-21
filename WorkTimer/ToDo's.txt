@@ -1,0 +1,19 @@
+﻿WORKTIMER TODOS
+
+Wecker funktion für Pausen/Frage Snooze/Not-Tracking (Action-Übergabe)
+
+PROGRAMMVERHALTEN
+ - Abfrage welcher Timer (ggf. Anrechnung des aktuellen UnknownTimer auf die gewählte Zeit)
+ - Bei Programmstart: Wenn locked dann warten auf Entsperren SONST UnknownTimer starten + Abfrage
+ - Bei Entsperrung: UnknownTimer + Abfrage
+ - Bei Sperren: UnknownTimer reset & starten
+
+SETTINGS
+ - Übliche Pausenzeit
+     - "Mache eine Pause" Erinnerung -> Nach X Stunden Arbeit an die Pause Erinnern / Snooze
+ - Übliche Arbeitszeit / Wochenarbeitszeit
+     - Not-Tracking Alarm -> wenn Idol während der Arbeitszeit alle X Minuten (Abschaltbar / Custom Snooze)
+
+HISTORIE/STATISTIK
+ - Als Dashboard mit Statistiken -> Diese Woche / Letzte Woche / Über-/Minus-Stunden usw.
+ - Detailsuche nach bestimmtem Tag/Woche/Monat (ggf. frei wählbare Datumseingrenzung?)

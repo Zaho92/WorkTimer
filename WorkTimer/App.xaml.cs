@@ -7,21 +7,6 @@ using WorkTimer.ViewModel;
 
 namespace WorkTimer
 {
-    // WORKTIMER TODOS
-    //TODO Wecker funktion für Pausen/Frage Snooze/Not-Tracking (Action-Übergabe)
-    //TODO PROGRAMMVERHALTEN
-    //TODO  - Abfrage welcher Timer (ggf. Anrechnung des aktuellen UnknownTimer auf die gewählte Zeit)
-    //TODO  - Bei Programmstart: Wenn locked dann warten auf Entsperren SONST UnknownTimer starten + Abfrage
-    //TODO  - Bei Entsperrung: UnknownTimer + Abfrage
-    //TODO  - Bei Sperren: UnknownTimer reset & starten
-    //TODO SETTINGS
-    //TODO  - Übliche Pausenzeit
-    //TODO      - "Mache eine Pause" Erinnerung -> Nach X Stunden Arbeit an die Pause Erinnern / Snooze
-    //TODO  - Übliche Arbeitszeit / Wochenarbeitszeit
-    //TODO      - Not-Tracking Alarm -> wenn Idol während der Arbeitszeit alle X Minuten (Abschaltbar / Custom Snooze)
-    //TODO HISTORIE/STATISTIK
-    //TODO  - Als Dashboard mit Statistiken -> Diese Woche / Letzte Woche / Über-/Minus-Stunden usw.
-    //TODO  - Detailsuche nach bestimmtem Tag/Woche/Monat (ggf. frei wählbare Datumseingrenzung?)
     public partial class App : Application
     {
         private TaskbarIcon taskBarIcon;

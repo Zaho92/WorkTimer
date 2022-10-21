@@ -8,7 +8,6 @@ namespace WorkTimer.View.Pages
         public TodayWorkTimePage()
         {
             InitializeComponent();
-            this.DataContext = new TodayWorkTimeViewModel();
         }
     }
 }

@@ -1,19 +1,11 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
 using WorkTimer.Model;
+using WorkTimer.Services;
 
 namespace WorkTimer.Controller
 {
     internal static class TimerController
     {
-        public static event PropertyChangedEventHandler StaticPropertyChanged;
-
-        private static void NotifyStaticPropertyChanged([CallerMemberName] string name = null)
-        {
-            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(name));
-        }
-
         public enum TimerType
         {
             None,
@@ -22,7 +14,7 @@ namespace WorkTimer.Controller
             BreakTimer
         }
 
-        private static TimerType _runningTimer = TimerType.None;
+        private static TimerType _runningTimer;
 
         public static TimerType RunningTimer
         {
@@ -35,53 +27,66 @@ namespace WorkTimer.Controller
                 if (value != _runningTimer)
                 {
                     _runningTimer = value;
-                    NotifyStaticPropertyChanged();
+                    OnRunningTimerChanged();
                 }
             }
         }
 
-        public static void RunWorkTimer()
+        public static event EventHandler<TimerType> RunningTimerChanged;
+
+        private static void OnRunningTimerChanged()
         {
-            StartTimer(TimerType.WorkTimer);
+            RunningTimerChanged?.Invoke(null, _runningTimer);
+        }
+
+        static TimerController()
+        {
+            _runningTimer = TimerType.None;
+            MidnightNotifier.DayChanged += MidnightNotifier_DayChanged;
+            SecondsNotifier.SecondTick += SecondsNotifier_SecondTick;
+        }
+
+        private static void SecondsNotifier_SecondTick(object? sender, DateTime e)
+        {
+            switch (_runningTimer)
+            {
+                case TimerType.WorkTimer:
+                    Data.TodayJobTimer.WorkTime.Seconds++;
+                    break;
+
+                case TimerType.BreakTimer:
+                    Data.TodayJobTimer.BreakTime.Seconds++;
+                    break;
+
+                case TimerType.UnknownTimer:
+                    Data.UnknownTime.Seconds++;
+                    break;
+            }
+        }
+
+        private static void MidnightNotifier_DayChanged(object? sender, DateTime e)
+        {
+            DataController.ReloadData();
         }
 
         public static void RunBreakTimer()
         {
-            StartTimer(TimerType.BreakTimer);
+            RunningTimer = TimerType.BreakTimer;
         }
 
         public static void RunUnknownTimer()
         {
-            StartTimer(TimerType.UnknownTimer);
+            RunningTimer = TimerType.UnknownTimer;
+        }
+
+        public static void RunWorkTimer()
+        {
+            RunningTimer = TimerType.WorkTimer;
         }
 
         public static void StopAllTimers()
         {
-            Data.TodayJobTimer.WorkTime.Pause();
-            Data.TodayJobTimer.BreakTime.Pause();
-            Data.UnknownTime.Pause();
             RunningTimer = TimerType.None;
-        }
-
-        private static void StartTimer(TimerType timer)
-        {
-            if (RunningTimer == timer) return;
-            StopAllTimers();
-            switch (timer)
-            {
-                case TimerType.WorkTimer:
-                    Data.TodayJobTimer.WorkTime.Run();
-                    break;
-
-                case TimerType.BreakTimer:
-                    Data.TodayJobTimer.BreakTime.Run();
-                    break;
-
-                case TimerType.UnknownTimer:
-                    Data.UnknownTime.Run();
-                    break;
-            }
-            RunningTimer = timer;
         }
     }
 }

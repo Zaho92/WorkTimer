@@ -42,6 +42,13 @@ namespace WorkTimer.Controller
             }
         }
 
+        public static void ReloadData()
+        {
+            SaveData();
+            Data.ClearData();
+            LoadData();
+        }
+
         public static void SaveData()
         {
             //Daten speichern
