@@ -43,7 +43,7 @@
                                 <Image
                                     Grid.Column="0"
                                     Height="24"
-                                    Margin="6,0"
+                                    Margin="12,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     Source="{Binding MenuImageSource, Converter={StaticResource IconFileSizeSelectorConverter}, ConverterParameter=24}" />
@@ -65,7 +65,7 @@
                 x:Name="ContentFrame"
                 Margin="-6,5,0,0"
                 BorderBrush="{DynamicResource ControlBorderColorBrush}"
-                BorderThickness="1"
+                BorderThickness="0"
                 NavigationUIVisibility="Hidden" />
         </Grid>
     </Grid>

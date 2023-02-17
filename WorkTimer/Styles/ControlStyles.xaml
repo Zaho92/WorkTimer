@@ -28,15 +28,16 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type Button}">
+    <Style TargetType="Button">
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
         <Setter Property="Height" Value="40" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Margin" Value="6" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource ControlBackgroundColor}" />
@@ -44,25 +45,46 @@
         </Setter>
         <Setter Property="BorderBrush">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlBorderColor}" />
+                <SolidColorBrush Color="{DynamicResource ControlBackgroundColor}" />
             </Setter.Value>
         </Setter>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource FontColorBrush}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource FontColor}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
+                <ControlTemplate TargetType="{x:Type Button}">
                     <Border
                         x:Name="Border"
+                        MinWidth="{TemplateBinding MinWidth}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        TextBlock.Foreground="{TemplateBinding Foreground}">
-                        <ContentPresenter
-                            Margin="2"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            RecognizesAccessKey="True" />
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <ContentPresenter
+                                x:Name="MyContentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}" />
+                            <Border Background="{TemplateBinding Background}">
+                                <Rectangle
+                                    x:Name="Mask"
+                                    Width="{Binding ElementName=MyContentPresenter, Path=ActualWidth}"
+                                    Height="{Binding ElementName=MyContentPresenter, Path=ActualHeight}"
+                                    Margin="{TemplateBinding Padding}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Fill="{TemplateBinding Foreground}">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="None" Visual="{Binding ElementName=MyContentPresenter}" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>
@@ -78,6 +100,9 @@
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
                                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlBackgroundMouseOverColor}" />
                                         </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Mask" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource FontMouseOverColor}" />
+                                        </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
@@ -87,6 +112,9 @@
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
                                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlBackgroundPressedColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Mask" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource FontPressedColor}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -98,20 +126,14 @@
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
                                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlBackgroundDisabledColor}" />
                                         </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Mask" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource FontDisabledColor}" />
+                                        </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsDefault" Value="true">
-                            <Setter TargetName="Border" Property="BorderBrush">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource ControlBorderColor}" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -127,7 +149,9 @@
         <Setter Property="Margin" Value="6,0,0,12" />
         <Setter Property="MinHeight" Value="40" />
         <Setter Property="MinWidth" Value="150" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource ControlBackgroundColor}" />
@@ -139,22 +163,43 @@
             </Setter.Value>
         </Setter>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource FontColorBrush}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource FontColor}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Border
                         x:Name="Border"
+                        MinWidth="{TemplateBinding MinWidth}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="6,0,0,6"
-                        TextBlock.Foreground="{TemplateBinding Foreground}">
-                        <ContentPresenter
-                            Margin="2"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"
-                            RecognizesAccessKey="True" />
+                        CornerRadius="6,0,0,6">
+                        <Grid>
+                            <ContentPresenter
+                                x:Name="MyContentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}" />
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6,0,0,6">
+                                <Rectangle
+                                    x:Name="Mask"
+                                    Width="{Binding ElementName=MyContentPresenter, Path=ActualWidth}"
+                                    Height="{Binding ElementName=MyContentPresenter, Path=ActualHeight}"
+                                    Margin="{TemplateBinding Padding}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Fill="{TemplateBinding Foreground}">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="None" Visual="{Binding ElementName=MyContentPresenter}" />
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </Border>
+                        </Grid>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>
@@ -164,21 +209,24 @@
                                 <VisualState x:Name="Normal" />
                                 <VisualState x:Name="MouseOver">
                                     <Storyboard>
-                                        <!--<ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlBackgroundMouseOverColor}" />
-                                        </ColorAnimationUsingKeyFrames>-->
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
                                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlBackgroundMouseOverColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Mask" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource FontMouseOverColor}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlBackgroundPressedColor}" />
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlBorderPressedColor}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
                                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlBackgroundPressedColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Mask" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource FontPressedColor}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -189,6 +237,9 @@
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
                                             <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlBackgroundDisabledColor}" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Mask" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource FontDisabledColor}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>

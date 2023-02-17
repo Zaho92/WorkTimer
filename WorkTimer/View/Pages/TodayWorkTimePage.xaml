@@ -80,12 +80,14 @@
             </Grid.ColumnDefinitions>
             <Button
                 Grid.Column="0"
+                Margin="12,12,6,12"
                 Command="{Binding StartWorkTimerCommand}"
                 IsEnabled="{Binding CanStartWorkTimer}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Margin="6,0"
+                            VerticalAlignment="Center"
                             Source="{helpers:Icon /Images/Icons/work-multi-size.ico,
                                                   16}"
                             Stretch="None" />
@@ -95,12 +97,14 @@
             </Button>
             <Button
                 Grid.Column="1"
+                Margin="6,12"
                 Command="{Binding StartBreakTimerCommand}"
                 IsEnabled="{Binding CanStartBreakTimer}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Margin="6,0"
+                            VerticalAlignment="Center"
                             Source="{helpers:Icon /Images/Icons/break-multi-size.ico,
                                                   16}"
                             Stretch="None" />
@@ -110,16 +114,18 @@
             </Button>
             <Button
                 Grid.Column="2"
+                Margin="6,12,12,12" Padding="0,4,0,0"
                 Command="{Binding StopAllTimersCommand}"
                 IsEnabled="{Binding CanStopTimers}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Image
                             Margin="6,0"
+                            VerticalAlignment="Center"
                             Source="{helpers:Icon /Images/Icons/pause-multi-size.ico,
                                                   16}"
                             Stretch="None" />
-                        <TextBlock Text="Zeiterfassung stoppen" />
+                        <TextBlock VerticalAlignment="Center" Text="Zeiterfassung stoppen" />
                     </StackPanel>
                 </Button.Content>
             </Button>

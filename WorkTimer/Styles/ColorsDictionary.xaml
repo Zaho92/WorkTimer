@@ -1,33 +1,42 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="FontColor">#cfcfcf</Color>
+    <!--  Font  -->
+    <!--  Colors  -->
+    <Color x:Key="FontColor">#BEE7B8</Color>
+    <Color x:Key="FontMouseOverColor">#E3F5E1</Color>
+    <Color x:Key="FontPressedColor">#E3F5E1</Color>
+    <Color x:Key="FontDisabledColor">#90D585</Color>
+    <!--  Brushes  -->
     <SolidColorBrush x:Key="FontColorBrush" Color="{DynamicResource FontColor}" />
-    <Color x:Key="FontMouseOverColor">#cfcfcf</Color>
     <SolidColorBrush x:Key="FontMouseOverColorBrush" Color="{DynamicResource FontMouseOverColor}" />
-    <Color x:Key="FontPressedColor">#cfcfcf</Color>
     <SolidColorBrush x:Key="FontPressedColorBrush" Color="{DynamicResource FontPressedColor}" />
-    <Color x:Key="FontDisabledColor">#8a8a8a</Color>
     <SolidColorBrush x:Key="FontDisabledColorBrush" Color="{DynamicResource FontDisabledColor}" />
 
-    <Color x:Key="WindowBackgroundColor">#212121</Color>
+    <!--  Window  -->
+    <!--  Colors  -->
+    <Color x:Key="WindowBackgroundColor">#191516</Color>
+    <Color x:Key="WindowBorderColor">#191516</Color>
+    <!--  Brushes  -->
     <SolidColorBrush x:Key="WindowBackgroundColorBrush" Color="{DynamicResource WindowBackgroundColor}" />
-    <Color x:Key="WindowBorderColor">#cfcfcf</Color>
     <SolidColorBrush x:Key="WindowBorderColorBrush" Color="{DynamicResource WindowBorderColor}" />
 
-    <Color x:Key="ControlBackgroundColor">#212121</Color>
+    <!--  Conrtol  -->
+    <!--  Colors  -->
+    <Color x:Key="ControlBackgroundColor">#345830</Color>
+    <Color x:Key="ControlBackgroundMouseOverColor">#477641</Color>
+    <Color x:Key="ControlBackgroundPressedColor">#569150</Color>
+    <Color x:Key="ControlBackgroundDisabledColor">#274224</Color>
+    <Color x:Key="ControlBorderColor">#345830</Color>
+    <Color x:Key="ControlBorderMouseOverColor">#477641</Color>
+    <Color x:Key="ControlBorderPressedColor">#569150</Color>
+    <Color x:Key="ControlBorderDisabledColor">#274224</Color>
+    <!--  Brushes  -->
     <SolidColorBrush x:Key="ControlBackgroundColorBrush" Color="{DynamicResource ControlBackgroundColor}" />
-    <Color x:Key="ControlBackgroundMouseOverColor">#525151</Color>
     <SolidColorBrush x:Key="ControlBackgroundMouseOverColorBrush" Color="{DynamicResource ControlBorderMouseOverColor}" />
-    <Color x:Key="ControlBackgroundPressedColor">#8a8a8a</Color>
     <SolidColorBrush x:Key="ControlBackgroundPressedColorBrush" Color="{DynamicResource ControlBorderPressedColor}" />
-    <Color x:Key="ControlBackgroundDisabledColor">#212121</Color>
     <SolidColorBrush x:Key="ControlBackgroundDisabledColorBrush" Color="{DynamicResource ControlBackgroundDisabledColor}" />
-    <Color x:Key="ControlBorderColor">#cfcfcf</Color>
     <SolidColorBrush x:Key="ControlBorderColorBrush" Color="{DynamicResource ControlBorderColor}" />
-    <Color x:Key="ControlBorderMouseOverColor">#cfcfcf</Color>
     <SolidColorBrush x:Key="ControlBorderMouseOverColorBrush" Color="{DynamicResource ControlBorderMouseOverColor}" />
-    <Color x:Key="ControlBorderPressedColor">#cfcfcf</Color>
     <SolidColorBrush x:Key="ControlBorderPressedColorBrush" Color="{DynamicResource ControlBorderPressedColor}" />
-    <Color x:Key="ControlBorderDisabledColor">#8a8a8a</Color>
     <SolidColorBrush x:Key="ControlBorderDisabledColorBrush" Color="{DynamicResource ControlBorderDisabledColor}" />
 </ResourceDictionary>
