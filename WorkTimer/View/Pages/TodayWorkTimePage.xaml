@@ -114,7 +114,8 @@
             </Button>
             <Button
                 Grid.Column="2"
-                Margin="6,12,12,12" Padding="0,4,0,0"
+                Margin="6,12,12,12"
+                Padding="0,4,0,0"
                 Command="{Binding StopAllTimersCommand}"
                 IsEnabled="{Binding CanStopTimers}">
                 <Button.Content>

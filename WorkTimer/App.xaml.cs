@@ -10,10 +10,10 @@ namespace WorkTimer
     public partial class App : Application
     {
         private TaskbarIcon taskBarIcon;
-        
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            DataController.LoadData();
+            DataController.LoadTodayData();
             TimerController.RunWorkTimer();
 
             taskBarIcon = GetTaskbarIcon();
@@ -37,7 +37,7 @@ namespace WorkTimer
 
         protected override void OnExit(ExitEventArgs e)
         {
-            DataController.SaveData();
+            DataController.SaveTodayData();
             taskBarIcon.Dispose();
             base.OnExit(e);
         }
