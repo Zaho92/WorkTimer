@@ -14,11 +14,10 @@ namespace WorkTimer
         protected override void OnStartup(StartupEventArgs e)
         {
             DataController.LoadTodayData();
-            TimerController.RunWorkTimer();
+            //TimerController.RunWorkTimer();
 
             taskBarIcon = GetTaskbarIcon();
             taskBarIcon.Visibility = Visibility.Visible;
-            SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
 
             base.OnStartup(e);
 
@@ -26,6 +25,7 @@ namespace WorkTimer
             {
                 DefaultValue = FindResource(typeof(Window))
             });
+            SessionController.InitSession();
         }
 
         private TaskbarIcon GetTaskbarIcon()
@@ -40,18 +40,6 @@ namespace WorkTimer
             DataController.SaveTodayData();
             taskBarIcon.Dispose();
             base.OnExit(e);
-        }
-
-        private void SystemEvents_SessionSwitch(object sender, SessionSwitchEventArgs e)
-        {
-            if (e.Reason == SessionSwitchReason.SessionLock)
-            {
-                TimerController.RunBreakTimer();
-            }
-            else if (e.Reason == SessionSwitchReason.SessionUnlock)
-            {
-                TimerController.RunWorkTimer();
-            }
         }
 
         public void ShowBalloon(string text, string title = "Work Timer", BalloonIcon BallonType = BalloonIcon.Info)

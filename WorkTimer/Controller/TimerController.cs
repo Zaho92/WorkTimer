@@ -67,6 +67,7 @@ namespace WorkTimer.Controller
         private static void MidnightNotifier_DayChanged(object? sender, DateTime e)
         {
             DataController.ReloadData();
+            RunUnknownTimer();
         }
 
         public static void RunBreakTimer()

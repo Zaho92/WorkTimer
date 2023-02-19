@@ -2,12 +2,6 @@
 
 Wecker funktion für Pausen/Frage Snooze/Not-Tracking (Action-Übergabe)
 
-PROGRAMMVERHALTEN
- - Abfrage welcher Timer (ggf. Anrechnung des aktuellen UnknownTimer auf die gewählte Zeit)
- - Bei Programmstart: Wenn locked dann warten auf Entsperren SONST UnknownTimer starten + Abfrage
- - Bei Entsperrung: UnknownTimer + Abfrage
- - Bei Sperren: UnknownTimer reset & starten
-
 SETTINGS
  - Übliche Pausenzeit
      - "Mache eine Pause" Erinnerung -> Nach X Stunden Arbeit an die Pause Erinnern / Snooze

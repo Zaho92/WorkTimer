@@ -3,9 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:WorkTimer.Converter">
-    <!--<converter:WindowMinimizeButtonVisibilityConverter x:Key="WindowMinimizeButtonVisibilityConverter" />
-    <converter:WindowMaximizeButtonVisibilityConverter x:Key="WindowMaximizeButtonVisibilityConverter" />
-    <converter:WindowRestoreButtonVisibilityConverter x:Key="WindowRestoreButtonVisibilityConverter" />-->
     <converter:IconFileSizeSelectorConverter x:Key="IconFileSizeSelectorConverter" />
     <Style TargetType="{x:Type Window}">
         <Setter Property="WindowChrome.WindowChrome">
@@ -22,13 +19,23 @@
         <Setter Property="FontFamily" Value="Calibri" />
         <Setter Property="Icon" Value="/Images/Icons/stopwatch-multi-size.ico" />
         <Setter Property="Title" Value="WorkTimer" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource WindowBackgroundColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource WindowBorderColor}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
                     <Border
-                        Background="{DynamicResource WindowBackgroundColorBrush}"
-                        BorderBrush="{DynamicResource WindowBorderColorBrush}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
                             <Grid.Style>

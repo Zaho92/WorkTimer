@@ -8,6 +8,7 @@ namespace WorkTimer.Controller
     public static class DataController
     {
         private static string DirectoryPath => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\JobTimer\Data\";
+
         private static string SaveFileNameTemplate => $"{SaveFileNameDateTemplate}{SaveFileNameExtension}";
 
         private const string SaveFileNameDateTemplate = "JobTimerData_{year}_{month}_{day}";

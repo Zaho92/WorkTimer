@@ -1,0 +1,155 @@
+﻿<Window
+    x:Class="WorkTimer.View.Windows.UnkownTimerAssignWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:controls="clr-namespace:WorkTimer.Controls"
+    xmlns:converter="clr-namespace:WorkTimer.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="clr-namespace:WorkTimer.Helpers"
+    xmlns:local="clr-namespace:WorkTimer.View.Windows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:WorkTimer.Model"
+    xmlns:viewmodel="clr-namespace:WorkTimer.ViewModel"
+    Title="Zeit zuweisen"
+    Width="550"
+    Height="450"
+    d:DataContext="{d:DesignInstance {x:Type viewmodel:UnkownTimerAssignViewModel}}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <converter:EnumBooleanConverter x:Key="EnumBooleanConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Margin="0,12,0,24"
+            HorizontalAlignment="Center"
+            FontSize="46"
+            Text="Willkommen zurück" />
+        <TextBlock
+            Grid.Row="1"
+            Margin="0,6"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            DataContext="{x:Static model:Data.UnknownTime}"
+            FontSize="14"><Run Text="Du warst " /><Run Text=" " /><Run FontWeight="Bold" Text="{Binding SecondsAsTimeString, FallbackValue=00:00:00, Mode=OneWay}" /><Run Text=" " /><Run Text=" weg und ich bin nicht sicher, wie ich die Zeit zuordnen soll." /></TextBlock>
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <RadioButton
+                Margin="0,6"
+                Content="Verwerfen"
+                IsChecked="{Binding AssignMethodType, ConverterParameter=DropTime, Converter={StaticResource EnumBooleanConverter}}" />
+            <RadioButton
+                Margin="0,6"
+                Content="Das war Arbeitszeit"
+                IsChecked="{Binding AssignMethodType, ConverterParameter=AddToWorkTime, Converter={StaticResource EnumBooleanConverter}}" />
+            <RadioButton
+                Margin="0,6"
+                Content="Das war Pausenzeit"
+                IsChecked="{Binding AssignMethodType, ConverterParameter=AddToBreakTime, Converter={StaticResource EnumBooleanConverter}}" />
+            <RadioButton
+                Margin="0,6"
+                Content="Manuell verteilen"
+                IsChecked="{Binding AssignMethodType, ConverterParameter=AssignManually, Converter={StaticResource EnumBooleanConverter}}" />
+        </StackPanel>
+        <Grid
+            Grid.Row="3"
+            HorizontalAlignment="Stretch"
+            Visibility="{Binding ShowManualAssignSettings, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Visible, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,12,6,12"
+                HorizontalAlignment="Stretch"
+                Orientation="Vertical">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Text="Arbeitszeit" />
+                <controls:TimeSpanUpDown MaxTimeSpanValue="{Binding MaxWorkTimeAssignment, Mode=OneWay}" TimeSpanValue="{Binding AssignedWorkTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <Behaviors:Interaction.Triggers>
+                        <Behaviors:EventTrigger EventName="TimeSpanValueChanged">
+                            <Behaviors:InvokeCommandAction Command="{Binding TimeSpanValueChangedCommand}" />
+                        </Behaviors:EventTrigger>
+                    </Behaviors:Interaction.Triggers>
+                </controls:TimeSpanUpDown>
+            </StackPanel>
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="6,12,0,12"
+                HorizontalAlignment="Stretch"
+                Orientation="Vertical">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Text="Pausenzeit" />
+                <controls:TimeSpanUpDown MaxTimeSpanValue="{Binding MaxBreakTimeAssignment, Mode=OneWay}" TimeSpanValue="{Binding AssignedBreakTime, Mode=TwoWay}">
+                    <Behaviors:Interaction.Triggers>
+                        <Behaviors:EventTrigger EventName="TimeSpanValueChanged">
+                            <Behaviors:InvokeCommandAction Command="{Binding TimeSpanValueChangedCommand}" />
+                        </Behaviors:EventTrigger>
+                    </Behaviors:Interaction.Triggers>
+                </controls:TimeSpanUpDown>
+            </StackPanel>
+            <TextBlock
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="0,6"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="14"><Run Text="Die Restlichen " /><Run Text=" " /><Run FontWeight="Bold" Text="{Binding UnassignedUnknownTime, FallbackValue=00:00:00, Mode=OneWay}" /><Run Text=" " /><Run Text=" werden verworfen." /></TextBlock>
+        </Grid>
+        <Grid Grid.Row="4" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Margin="0,12,6,0"
+                Command="{Binding ApplyAndWorkCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Margin="6,0"
+                        VerticalAlignment="Center"
+                        Source="{helpers:Icon /Images/Icons/work-multi-size.ico,
+                                              16}"
+                        Stretch="None" />
+                    <TextBlock Text="Übernehmen und Arbeit" />
+                </StackPanel>
+            </Button>
+            <Button
+                Grid.Column="1"
+                Margin="6,12,0,0"
+                Command="{Binding ApplyAndBreakCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Margin="6,0"
+                        VerticalAlignment="Center"
+                        Source="{helpers:Icon /Images/Icons/break-multi-size.ico,
+                                              16}"
+                        Stretch="None" />
+                    <TextBlock Text="Übernehmen und Pause" />
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

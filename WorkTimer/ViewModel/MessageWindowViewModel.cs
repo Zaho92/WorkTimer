@@ -23,14 +23,14 @@ namespace WorkTimer.ViewModel
         private string _messageText;
 
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(OkButtonVisibility))]
-        [NotifyPropertyChangedFor(nameof(AlarmButtonVisibility))]
-        [NotifyPropertyChangedFor(nameof(YesNoButtonVisibility))]
+        [NotifyPropertyChangedFor(nameof(ShowOkButton))]
+        [NotifyPropertyChangedFor(nameof(ShowAlarmButton))]
+        [NotifyPropertyChangedFor(nameof(ShowYesNoButtons))]
         private MessageController.MessageType _thisType;
 
-        public Visibility OkButtonVisibility => (ThisType != MessageController.MessageType.Alarm && ThisType != MessageController.MessageType.YesNo) ? Visibility.Visible : Visibility.Collapsed;
-        public Visibility AlarmButtonVisibility => (ThisType == MessageController.MessageType.Alarm) ? Visibility.Visible : Visibility.Collapsed;
-        public Visibility YesNoButtonVisibility => (ThisType == MessageController.MessageType.YesNo) ? Visibility.Visible : Visibility.Collapsed;
+        public bool ShowOkButton => ThisType != MessageController.MessageType.Alarm && ThisType != MessageController.MessageType.YesNo;
+        public bool ShowAlarmButton => ThisType == MessageController.MessageType.Alarm;
+        public bool ShowYesNoButtons => ThisType == MessageController.MessageType.YesNo;
 
         public MessageWindowViewModel(MessageController.MessageType type, string header, string message)
         {

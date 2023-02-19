@@ -15,7 +15,7 @@
     <!--  Window  -->
     <!--  Colors  -->
     <Color x:Key="WindowBackgroundColor">#191516</Color>
-    <Color x:Key="WindowBorderColor">#191516</Color>
+    <Color x:Key="WindowBorderColor">#345830</Color>
     <!--  Brushes  -->
     <SolidColorBrush x:Key="WindowBackgroundColorBrush" Color="{DynamicResource WindowBackgroundColor}" />
     <SolidColorBrush x:Key="WindowBorderColorBrush" Color="{DynamicResource WindowBorderColor}" />

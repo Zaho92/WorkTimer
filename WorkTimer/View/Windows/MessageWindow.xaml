@@ -16,6 +16,7 @@
     mc:Ignorable="d">
     <Window.Resources>
         <converter:IconFileSizeSelectorConverter x:Key="IconFileSizeSelectorConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -53,7 +54,7 @@
                     TextWrapping="Wrap" />
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" Visibility="{Binding OkButtonVisibility, FallbackValue=Visible}">
+        <Grid Grid.Row="1" Visibility="{Binding ShowOkButton, FallbackValue=Visible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -63,7 +64,7 @@
                 Command="{Binding OkButtonClickCommand}"
                 Content="OK" />
         </Grid>
-        <Grid Grid.Row="2" Visibility="{Binding AlarmButtonVisibility, FallbackValue=Collapsed}">
+        <Grid Grid.Row="2" Visibility="{Binding ShowAlarmButton, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -77,7 +78,7 @@
                 Command="{Binding CancelAlarmButtonClickCommand}"
                 Content="Ausschalten" />
         </Grid>
-        <Grid Grid.Row="3" Visibility="{Binding YesNoButtonVisibility, FallbackValue=Collapsed}">
+        <Grid Grid.Row="3" Visibility="{Binding ShowYesNoButtons, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
