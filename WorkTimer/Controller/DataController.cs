@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using WorkTimer.Model;
@@ -44,17 +45,21 @@ namespace WorkTimer.Controller
             }
         }
 
-        public static void LoadHistoryData(DateTime fromDate, DateTime? toDate = null)
+        public static IEnumerable<JobTimerModel> LoadHistoryData(DateTime fromDate, DateTime? toDate = null, bool exceptToday = true)
         {
             DateTime currentDate = new DateTime(fromDate.Ticks);
-            do
+            while (currentDate <= toDate)
             {
-                var historyData = LoadFile<JobTimerModel>(GetFilePath(currentDate));
-                if (historyData != null)
+                if (!exceptToday || currentDate.Date != DateTime.Today)
                 {
-                    Data.PH_HistoryTimerData.TryAdd(DateOnly.FromDateTime(currentDate), historyData);
+                    var historyData = LoadFile<JobTimerModel>(GetFilePath(currentDate));
+                    if (historyData != null)
+                    {
+                        yield return historyData;
+                    }
                 }
-            } while (currentDate < toDate);
+                currentDate = currentDate.AddDays(1);
+            }
         }
 
         private static T? LoadFile<T>(string path)

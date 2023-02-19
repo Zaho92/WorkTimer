@@ -11,8 +11,13 @@ public partial class SecondsModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(SecondsAsTimeSpan))]
     [NotifyPropertyChangedFor(nameof(SecondsAsTimeString))]
     private int _seconds;
+
     [JsonIgnore]
     public TimeSpan SecondsAsTimeSpan => new(0, 0, Seconds);
+
     [JsonIgnore]
     public string SecondsAsTimeString => SecondsAsTimeSpan.ToString("c");
+
+    [JsonIgnore]
+    public double SecondsAsHours => new TimeSpan(0, 0, Seconds).TotalHours;
 }

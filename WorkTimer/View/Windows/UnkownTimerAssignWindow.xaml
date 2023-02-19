@@ -16,7 +16,7 @@
     Height="450"
     d:DataContext="{d:DesignInstance {x:Type viewmodel:UnkownTimerAssignViewModel}}"
     ResizeMode="NoResize"
-    WindowStartupLocation="CenterOwner"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Resources>
         <converter:EnumBooleanConverter x:Key="EnumBooleanConverter" />

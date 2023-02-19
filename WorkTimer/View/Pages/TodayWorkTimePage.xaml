@@ -35,10 +35,11 @@
                 Text="Heutige Arbeitszeit" />
             <TextBlock
                 Grid.Row="1"
-                Margin="6,-20,6,6"
+                Margin="6,-8,6,6"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 DataContext="{x:Static model:Data.TodayJobTimer}"
+                FontFamily="Lucida Console"
                 FontSize="48"
                 FontStyle="Italic"
                 FontWeight="ExtraLight"
@@ -60,10 +61,11 @@
                 Text="Heutige Pausenzeit" />
             <TextBlock
                 Grid.Row="1"
-                Margin="6,-20,6,6"
+                Margin="6,-8,6,6"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 DataContext="{x:Static model:Data.TodayJobTimer}"
+                FontFamily="Lucida Console"
                 FontSize="48"
                 FontStyle="Italic"
                 FontWeight="ExtraLight"

@@ -1,0 +1,197 @@
+﻿<Page
+    x:Class="WorkTimer.View.Pages.StatisticsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="clr-namespace:WorkTimer.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:WorkTimer.ViewModel"
+    Title="StatisticsPage"
+    d:DataContext="{d:DesignInstance {x:Type viewmodel:StatisticsViewModel}}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid Margin="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <StackPanel
+                Margin="0,30,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Orientation="Horizontal">
+                <Button
+                    Width="24"
+                    Height="24"
+                    Margin="0,0,20,0"
+                    Command="{Binding ShowPreviousChartWeekCommand}"
+                    IsEnabled="{Binding CanShowPreviousWeekChart, FallbackValue=False}"
+                    Style="{StaticResource UpDownButtonStyle}">
+                    <Path Data="M 0 10 L 10 0 L 10 20 Z" Fill="Black" />
+                </Button>
+                <Button
+                    Width="24"
+                    Height="24"
+                    Margin="20,0,0,0"
+                    Command="{Binding ShowNextChartWeekCommand}"
+                    IsEnabled="{Binding CanShowNextWeekChart, FallbackValue=False}"
+                    Style="{StaticResource UpDownButtonStyle}">
+                    <Path Data="M 0 0 L 10 10 L 0 20 Z" Fill="Black" />
+                </Button>
+            </StackPanel>
+            <charting:Chart
+                Title="{Binding ChartTitle, FallbackValue=Wochenrückblick}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                BorderThickness="0"
+                CrosshairVisibility="Visible">
+                <charting:Chart.Axes>
+                    <charting:LinearAxis
+                        Maximum="10"
+                        Minimum="0"
+                        Orientation="Y"
+                        ShowGridLines="True">
+                        <charting:LinearAxis.GridLineStyle>
+                            <Style TargetType="{x:Type Line}">
+                                <Setter Property="Stroke" Value="{DynamicResource FontColorBrush}" />
+                                <Setter Property="Fill" Value="{DynamicResource FontColorBrush}" />
+                            </Style>
+                        </charting:LinearAxis.GridLineStyle>
+                    </charting:LinearAxis>
+                </charting:Chart.Axes>
+                <charting:StackedColumnSeries
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    BorderThickness="0"
+                    IsHitTestVisible="False"
+                    IsManipulationEnabled="False"
+                    SelectionMode="None"
+                    ToolTipService.ToolTip="{x:Null}">
+                    <charting:SeriesDefinition
+                        Title="Pausenzeit"
+                        DependentValuePath="Value.BreakTime.SecondsAsHours"
+                        IndependentValuePath="Key"
+                        ItemsSource="{Binding ChartData}" />
+                    <charting:SeriesDefinition
+                        Title="Arbeitszeit"
+                        DependentValuePath="Value.WorkTime.SecondsAsHours"
+                        IndependentValuePath="Key"
+                        ItemsSource="{Binding ChartData}" />
+                </charting:StackedColumnSeries>
+            </charting:Chart>
+        </Grid>
+        <StackPanel
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Margin="6,6,6,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    FontSize="38"
+                    FontStyle="Oblique"
+                    FontWeight="Thin"
+                    Text="Diese Woche" />
+                <StackPanel
+                    Grid.Row="1"
+                    Margin="6,0,6,6"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Image
+                        Margin="6,0"
+                        VerticalAlignment="Center"
+                        Source="{helpers:Icon /Images/Icons/work-multi-size.ico,
+                                              28}"
+                        Stretch="None" />
+                    <TextBlock
+                        FontFamily="Lucida Console"
+                        FontSize="32"
+                        FontStyle="Oblique"
+                        FontWeight="ExtraLight"
+                        Text="{Binding ThisWeekWorkTime.SecondsAsTimeString, FallbackValue=00:00:00}" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="2"
+                    Margin="6,0,6,6"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Image
+                        Margin="6,0"
+                        VerticalAlignment="Center"
+                        Source="{helpers:Icon /Images/Icons/break-multi-size.ico,
+                                              28}"
+                        Stretch="None" />
+                    <TextBlock
+                        FontFamily="Lucida Console"
+                        FontSize="32"
+                        FontStyle="Oblique"
+                        FontWeight="ExtraLight"
+                        Text="{Binding ThisWeekBreakTime.SecondsAsTimeString, FallbackValue=00:00:00}" />
+                </StackPanel>
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Margin="6,6,6,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    FontSize="38"
+                    FontStyle="Oblique"
+                    FontWeight="Thin"
+                    Text="Diesen Monat" />
+                <StackPanel
+                    Grid.Row="1"
+                    Margin="6,0,6,6"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Image
+                        Margin="6,0,6,3"
+                        VerticalAlignment="Center"
+                        Source="{helpers:Icon /Images/Icons/work-multi-size.ico,
+                                              28}"
+                        Stretch="None" />
+                    <TextBlock
+                        FontFamily="Lucida Console"
+                        FontSize="32"
+                        FontStyle="Oblique"
+                        FontWeight="ExtraLight"
+                        Text="{Binding ThisMonthWorkTime.SecondsAsTimeString, FallbackValue=00:00:00}" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Row="2"
+                    Margin="6,0,6,6"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Image
+                        Margin="6,0"
+                        VerticalAlignment="Center"
+                        Source="{helpers:Icon /Images/Icons/break-multi-size.ico,
+                                              28}"
+                        Stretch="None" />
+                    <TextBlock
+                        FontFamily="Lucida Console"
+                        FontSize="32"
+                        FontStyle="Oblique"
+                        FontWeight="ExtraLight"
+                        Text="{Binding ThisMonthBreakTime.SecondsAsTimeString, FallbackValue=00:00:00}" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>
