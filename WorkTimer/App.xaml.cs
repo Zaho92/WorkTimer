@@ -14,7 +14,6 @@ namespace WorkTimer
         protected override void OnStartup(StartupEventArgs e)
         {
             DataController.LoadTodayData();
-            //TimerController.RunWorkTimer();
 
             taskBarIcon = GetTaskbarIcon();
             taskBarIcon.Visibility = Visibility.Visible;
