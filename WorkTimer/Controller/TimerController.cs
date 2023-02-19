@@ -42,7 +42,6 @@ namespace WorkTimer.Controller
         static TimerController()
         {
             _runningTimer = TimerType.None;
-            MidnightNotifier.DayChanged += MidnightNotifier_DayChanged;
             SecondsNotifier.SecondTick += SecondsNotifier_SecondTick;
         }
 
@@ -62,12 +61,6 @@ namespace WorkTimer.Controller
                     Data.UnknownTime.Seconds++;
                     break;
             }
-        }
-
-        private static void MidnightNotifier_DayChanged(object? sender, DateTime e)
-        {
-            DataController.ReloadData();
-            RunUnknownTimer();
         }
 
         public static void RunBreakTimer()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkTimer.Services;
 using WorkTimer.View.Windows;
 
 namespace WorkTimer.Controller
@@ -13,6 +14,13 @@ namespace WorkTimer.Controller
         internal static void InitSession()
         {
             SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
+            MidnightNotifier.DayChanged += MidnightNotifier_DayChanged;
+            StartStatupSession();
+        }
+
+        private static void MidnightNotifier_DayChanged(object? sender, DateTime e)
+        {
+            DataController.ReloadData();
             StartStatupSession();
         }
 
