@@ -88,7 +88,7 @@ namespace WorkTimer.Controller
 
         private static bool SaveFile<T>(string path, T data)
         {
-            if (!File.Exists(path)) return false;
+            if (!Directory.Exists(DirectoryPath)) Directory.CreateDirectory(DirectoryPath);
             try
             {
                 string jsonString = JsonSerializer.Serialize(data);
