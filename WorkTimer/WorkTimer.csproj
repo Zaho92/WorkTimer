@@ -18,6 +18,7 @@
     <None Remove="Images\Icons\menu-multi-size.ico" />
     <None Remove="Images\Icons\pause-multi-size.ico" />
     <None Remove="Images\Icons\question-multi-size.ico" />
+    <None Remove="Images\Icons\refresh-multi-size.ico" />
     <None Remove="Images\Icons\settings-multi-size.ico" />
     <None Remove="Images\Icons\statistics-multi-size.ico" />
     <None Remove="Images\Icons\stopwatch-multi-size.ico" />
@@ -64,6 +65,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Icons\question-multi-size.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\refresh-multi-size.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Icons\settings-multi-size.ico">

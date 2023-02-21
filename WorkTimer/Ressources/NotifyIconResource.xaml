@@ -27,7 +27,7 @@
                 <TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Foreground="{DynamicResource FontColorBrush}"
+                    Foreground="Black"
                     Text="{Binding ToolTipText, FallbackValue=Test}" />
             </Border>
         </tb:TaskbarIcon.ToolTip>

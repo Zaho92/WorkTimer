@@ -26,7 +26,7 @@
                 <Button
                     Width="24"
                     Height="24"
-                    Margin="0,0,20,0"
+                    Margin="0,0,6,0"
                     Command="{Binding ShowPreviousChartWeekCommand}"
                     IsEnabled="{Binding CanShowPreviousWeekChart, FallbackValue=False}"
                     Style="{StaticResource UpDownButtonStyle}">
@@ -35,7 +35,20 @@
                 <Button
                     Width="24"
                     Height="24"
-                    Margin="20,0,0,0"
+                    Margin="6,0,6,0"
+                    Command="{Binding RefreshChartCommand}"
+                    Style="{StaticResource UpDownButtonStyle}">
+                    <Image
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="{helpers:Icon /Images/Icons/refresh-multi-size.ico,
+                                              16}"
+                        Stretch="None" />
+                </Button>
+                <Button
+                    Width="24"
+                    Height="24"
+                    Margin="6,0,0,0"
                     Command="{Binding ShowNextChartWeekCommand}"
                     IsEnabled="{Binding CanShowNextWeekChart, FallbackValue=False}"
                     Style="{StaticResource UpDownButtonStyle}">

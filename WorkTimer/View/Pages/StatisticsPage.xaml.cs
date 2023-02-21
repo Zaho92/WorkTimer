@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WorkTimer.Model;
 using WorkTimer.ViewModel;
 
 namespace WorkTimer.View.Pages

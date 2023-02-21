@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -86,8 +85,10 @@ namespace WorkTimer.ViewModel
             DateTime firstDayOfWeek = CultureInfo.CurrentCulture.Calendar.FirstDateOfWeekContainingDate(DateTime.Today);
             DateTime lastDayOfWeek = firstDayOfWeek.AddDays(6);
             var thisWeekData = DataController.LoadHistoryData(firstDayOfWeek, lastDayOfWeek);
-            ThisWeekWorkTime.Seconds = thisWeekWorkSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.WorkTime?.Seconds ?? 0);
-            ThisWeekBreakTime.Seconds = thisWeekBreakSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.BreakTime?.Seconds ?? 0);
+            thisWeekWorkSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.WorkTime?.Seconds ?? 0);
+            thisWeekBreakSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.BreakTime?.Seconds ?? 0);
+            ThisWeekWorkTime.Seconds = thisWeekWorkSecondsWithoutToday + Data.TodayJobTimer.WorkTime.Seconds;
+            ThisWeekBreakTime.Seconds = thisWeekBreakSecondsWithoutToday + Data.TodayJobTimer.BreakTime.Seconds;
         }
 
         private void LoadThisMonthStatistics()
@@ -96,8 +97,10 @@ namespace WorkTimer.ViewModel
             DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
             DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
             var thisWeekData = DataController.LoadHistoryData(firstDayOfMonth, lastDayOfMonth);
-            ThisMonthWorkTime.Seconds = thisMonthWorkSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.WorkTime?.Seconds ?? 0);
-            ThisMonthBreakTime.Seconds = thisMonthBreakSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.BreakTime?.Seconds ?? 0);
+            thisMonthWorkSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.WorkTime?.Seconds ?? 0);
+            thisMonthBreakSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.BreakTime?.Seconds ?? 0);
+            ThisMonthWorkTime.Seconds = thisMonthWorkSecondsWithoutToday + Data.TodayJobTimer.WorkTime.Seconds;
+            ThisMonthBreakTime.Seconds = thisMonthBreakSecondsWithoutToday + Data.TodayJobTimer.BreakTime.Seconds;
         }
 
         [RelayCommand]
@@ -118,6 +121,12 @@ namespace WorkTimer.ViewModel
             }
         }
 
+        [RelayCommand]
+        public void RefreshChart()
+        {
+            UpdateChart();
+        }
+
         private void UpdateChart()
         {
             DateTime firstDayOfWeek = CultureInfo.CurrentCulture.Calendar.FirstDateOfWeekContainingDate(CurrenChartRefenrenceDate);
@@ -127,12 +136,19 @@ namespace WorkTimer.ViewModel
 
         private void GererateChartData(DateTime fromDate, DateTime toDate)
         {
-            ChartTitle = $"{fromDate.ToLongDateString()} bis {toDate.ToLongDateString()}";
+            ChartTitle = $"{fromDate.ToShortDateString()} - {toDate.ToShortDateString()}";
             var DataDictionary = new Dictionary<string, JobTimerModel>();
             var currentWeekData = DataController.LoadHistoryData(fromDate, toDate);
             while (fromDate <= toDate)
             {
-                DataDictionary.Add(fromDate.ToShortDateString(), currentWeekData.FirstOrDefault(jtm => jtm.Date.Date == fromDate.Date) ?? new JobTimerModel());
+                if (fromDate == DateTime.Today)
+                {
+                    DataDictionary.Add(fromDate.ToShortDateString(), Data.TodayJobTimer);
+                }
+                else
+                {
+                    DataDictionary.Add(fromDate.ToShortDateString(), currentWeekData.FirstOrDefault(jtm => jtm.Date.Date == fromDate.Date) ?? new JobTimerModel());
+                }
                 fromDate = fromDate.AddDays(1);
             }
             ChartData = DataDictionary;
