@@ -65,16 +65,19 @@ namespace WorkTimer.ViewModel
         [RelayCommand]
         public void ApplyAndWork()
         {
-            AssignByType();
-            TimerController.RunWorkTimer();
-            Close();
+            ApplyAndRunTimer(TimerController.TimerType.WorkTimer);
         }
 
         [RelayCommand]
         public void ApplyAndBreak()
         {
+            ApplyAndRunTimer(TimerController.TimerType.BreakTimer);
+        }
+
+        public void ApplyAndRunTimer(TimerController.TimerType type)
+        {
             AssignByType();
-            TimerController.RunBreakTimer();
+            TimerController.RunTimer(type);
             Close();
         }
 

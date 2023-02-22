@@ -20,7 +20,7 @@ namespace WorkTimer.Model
                         @"/Images/Icons/stopwatch-multi-size.ico"),
                     new MenuButtonModel("Statistiken", new StatisticsPage(),
                         @"/Images/Icons/statistics-multi-size.ico"),
-                    new MenuButtonModel("Einstellungen", new TodayWorkTimePage(),
+                    new MenuButtonModel("Einstellungen", new SettingsPage(),
                         @"/Images/Icons/settings-multi-size.ico")
                 };
             }

@@ -8,7 +8,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/ColorsDictionary.xaml" />
-                <ResourceDictionary Source="Styles/ControlStyles.xaml" />
+                <ResourceDictionary Source="Styles/GenericStyles.xaml" />
                 <ResourceDictionary Source="Styles/WindowStyle.xaml" />
                 <ResourceDictionary Source="Ressources/NotifyIconResource.xaml" />
             </ResourceDictionary.MergedDictionaries>

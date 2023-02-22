@@ -1,0 +1,30 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ControlStyles/ButtonStyle.xaml" />
+        <ResourceDictionary Source="ControlStyles/ChartStyle.xaml" />
+        <ResourceDictionary Source="ControlStyles/ContextMenuStyle.xaml" />
+        <ResourceDictionary Source="ControlStyles/ListBoxStyle.xaml" />
+        <ResourceDictionary Source="ControlStyles/MenuStyle.xaml" />
+        <ResourceDictionary Source="ControlStyles/RadioButtonStyle.xaml" />
+        <!--<ResourceDictionary Source="ControlStyles/ScrollViewerStyle.xaml" />-->
+        <ResourceDictionary Source="ControlStyles/TextBlockStyle.xaml" />
+        <ResourceDictionary Source="ControlStyles/TextBoxStyle.xaml" />
+        <ResourceDictionary Source="ControlStyles/ToggleButtonStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style BasedOn="{StaticResource MyButtonStyle}" TargetType="{x:Type Button}" />
+    <Style BasedOn="{StaticResource MyChartStyle}" TargetType="{x:Type charting:Chart}" />
+    <Style BasedOn="{StaticResource MyContextMenuStyle}" TargetType="{x:Type ContextMenu}" />
+    <Style BasedOn="{StaticResource MyListBoxItemStyle}" TargetType="{x:Type ListBoxItem}" />
+    <Style BasedOn="{StaticResource MyListBoxStyle}" TargetType="{x:Type ListBox}" />
+    <Style BasedOn="{StaticResource MyMenuItemStyle}" TargetType="{x:Type MenuItem}" />
+    <Style BasedOn="{StaticResource MyMenuStyle}" TargetType="{x:Type Menu}" />
+    <Style BasedOn="{StaticResource MyRadioButtonStyle}" TargetType="{x:Type RadioButton}" />
+    <!--<Style BasedOn="{StaticResource MyScrollViewerStyle}" TargetType="{x:Type ScrollViewer}" />-->
+    <Style BasedOn="{StaticResource MyTextBlockStyle}" TargetType="{x:Type TextBlock}" />
+    <Style BasedOn="{StaticResource MyTextBoxStyle}" TargetType="{x:Type TextBox}" />
+    <Style BasedOn="{StaticResource MyToggleButtonStyle}" TargetType="{x:Type ToggleButton}" />
+</ResourceDictionary>

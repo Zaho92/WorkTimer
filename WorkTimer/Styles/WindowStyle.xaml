@@ -4,6 +4,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:WorkTimer.Converter">
     <converter:IconFileSizeSelectorConverter x:Key="IconFileSizeSelectorConverter" />
+    <Style
+        x:Key="CustomWindowTitleButtonStyle"
+        BasedOn="{StaticResource MyButtonStyle}"
+        TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="BorderThickness" Value="1,0,1,1" />
+        <Setter Property="Margin" Value="0,1,0,0" />
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource ControlBackgroundColor}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style TargetType="{x:Type Window}">
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
@@ -163,21 +177,6 @@
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style
-        x:Key="CustomWindowTitleButtonStyle"
-        BasedOn="{StaticResource {x:Type Button}}"
-        TargetType="{x:Type Button}">
-        <Setter Property="Width" Value="50" />
-        <Setter Property="Height" Value="Auto" />
-        <Setter Property="BorderThickness" Value="1,0,1,1" />
-        <Setter Property="Margin" Value="0,1,0,0" />
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource ControlBackgroundColor}" />
             </Setter.Value>
         </Setter>
     </Style>

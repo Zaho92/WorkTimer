@@ -20,7 +20,7 @@ namespace WorkTimer.Controller
 
         private static void MidnightNotifier_DayChanged(object? sender, DateTime e)
         {
-            DataController.ReloadData();
+            DataControllers.ReloadAllData();
             StartStatupSession();
         }
 

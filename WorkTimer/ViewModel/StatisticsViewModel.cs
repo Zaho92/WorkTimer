@@ -84,7 +84,7 @@ namespace WorkTimer.ViewModel
         {
             DateTime firstDayOfWeek = CultureInfo.CurrentCulture.Calendar.FirstDateOfWeekContainingDate(DateTime.Today);
             DateTime lastDayOfWeek = firstDayOfWeek.AddDays(6);
-            var thisWeekData = DataController.LoadHistoryData(firstDayOfWeek, lastDayOfWeek);
+            var thisWeekData = Controller.SpecialDataControllers.TimerDataController.LoadHistoryData(firstDayOfWeek, lastDayOfWeek);
             thisWeekWorkSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.WorkTime?.Seconds ?? 0);
             thisWeekBreakSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.BreakTime?.Seconds ?? 0);
             ThisWeekWorkTime.Seconds = thisWeekWorkSecondsWithoutToday + Data.TodayJobTimer.WorkTime.Seconds;
@@ -96,7 +96,7 @@ namespace WorkTimer.ViewModel
             DateTime today = DateTime.Today;
             DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
             DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
-            var thisWeekData = DataController.LoadHistoryData(firstDayOfMonth, lastDayOfMonth);
+            var thisWeekData = Controller.SpecialDataControllers.TimerDataController.LoadHistoryData(firstDayOfMonth, lastDayOfMonth);
             thisMonthWorkSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.WorkTime?.Seconds ?? 0);
             thisMonthBreakSecondsWithoutToday = thisWeekData.Sum(jtm => jtm?.BreakTime?.Seconds ?? 0);
             ThisMonthWorkTime.Seconds = thisMonthWorkSecondsWithoutToday + Data.TodayJobTimer.WorkTime.Seconds;
@@ -138,7 +138,7 @@ namespace WorkTimer.ViewModel
         {
             ChartTitle = $"{fromDate.ToShortDateString()} - {toDate.ToShortDateString()}";
             var DataDictionary = new Dictionary<string, JobTimerModel>();
-            var currentWeekData = DataController.LoadHistoryData(fromDate, toDate);
+            var currentWeekData = Controller.SpecialDataControllers.TimerDataController.LoadHistoryData(fromDate, toDate);
             while (fromDate <= toDate)
             {
                 if (fromDate == DateTime.Today)

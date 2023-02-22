@@ -13,7 +13,7 @@ namespace WorkTimer
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            DataController.LoadTodayData();
+            DataControllers.LoadAllData();
 
             taskBarIcon = GetTaskbarIcon();
             taskBarIcon.Visibility = Visibility.Visible;
@@ -36,7 +36,7 @@ namespace WorkTimer
 
         protected override void OnExit(ExitEventArgs e)
         {
-            DataController.SaveTodayData();
+            DataControllers.SaveAllData();
             taskBarIcon.Dispose();
             base.OnExit(e);
         }

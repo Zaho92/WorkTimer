@@ -9,7 +9,7 @@ namespace WorkTimer.Model
     {
         public static JobTimerModel TodayJobTimer { get; set; }
         public static SecondsModel UnknownTime { get; set; }
-        public static Dictionary<DateOnly, JobTimerModel> PH_HistoryTimerData { get; set; }
+        public static SettingsModel Settings { get; set; }
 
         static Data()
         {
@@ -25,7 +25,7 @@ namespace WorkTimer.Model
         {
             TodayJobTimer = new JobTimerModel();
             UnknownTime = new SecondsModel();
-            PH_HistoryTimerData = new Dictionary<DateOnly, JobTimerModel>();
+            Settings = new SettingsModel();
         }
     }
 }

@@ -1,0 +1,206 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
+    xmlns:chartingprimitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=DotNetProjects.DataVisualization.Toolkit"
+    xmlns:visualization="clr-namespace:System.Windows.Controls.DataVisualization;assembly=DotNetProjects.DataVisualization.Toolkit">
+    <!--  LocationLegend  -->
+    <Style x:Key="LocationLegendStyle" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="{DynamicResource ControlBackgroundColorBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderColorBrush}" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Margin" Value="6" />
+    </Style>
+
+    <!--  Chart  -->
+    <Style x:Key="MyChartStyle" TargetType="{x:Type charting:Chart}">
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderColorBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Palette">
+            <Setter.Value>
+                <visualization:ResourceDictionaryCollection>
+                    <ResourceDictionary>
+                        <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundColorBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlBackgroundColorBrush}" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Foreground" Value="{DynamicResource ControlBackgroundColorBrush}" />
+                        </Style>
+                        <Style TargetType="{x:Type Shape}">
+                            <Setter Property="Stroke" Value="{DynamicResource ControlBackgroundColorBrush}" />
+                            <Setter Property="StrokeThickness" Value="0" />
+                            <Setter Property="StrokeMiterLimit" Value="0" />
+                            <Setter Property="Fill" Value="{DynamicResource ControlBackgroundColorBrush}" />
+                        </Style>
+                    </ResourceDictionary>
+                    <ResourceDictionary>
+                        <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                            <Setter Property="Background" Value="{DynamicResource FontDisabledColorBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource FontDisabledColorBrush}" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Foreground" Value="{DynamicResource FontDisabledColorBrush}" />
+                        </Style>
+                        <Style TargetType="{x:Type Shape}">
+                            <Setter Property="Stroke" Value="{DynamicResource FontDisabledColorBrush}" />
+                            <Setter Property="StrokeThickness" Value="0" />
+                            <Setter Property="StrokeMiterLimit" Value="0" />
+                            <Setter Property="Fill" Value="{DynamicResource FontDisabledColorBrush}" />
+                        </Style>
+                    </ResourceDictionary>
+                    <ResourceDictionary>
+                        <Style x:Key="DataPointStyle" TargetType="{x:Type Control}">
+                            <Setter Property="Background" Value="{DynamicResource ControlBackgroundMouseOverColorBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlBackgroundMouseOverColorBrush}" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Foreground" Value="{DynamicResource ControlBackgroundMouseOverColorBrush}" />
+                        </Style>
+                        <Style TargetType="{x:Type Shape}">
+                            <Setter Property="Stroke" Value="{DynamicResource ControlBackgroundMouseOverColorBrush}" />
+                            <Setter Property="StrokeThickness" Value="0" />
+                            <Setter Property="StrokeMiterLimit" Value="0" />
+                            <Setter Property="Fill" Value="{DynamicResource ControlBackgroundMouseOverColorBrush}" />
+                        </Style>
+                    </ResourceDictionary>
+                </visualization:ResourceDictionaryCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TitleStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type visualization:Title}">
+                    <Setter Property="FontSize" Value="22" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="0,-15,0,25" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="LegendStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type visualization:Legend}">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="VerticalAlignment" Value="Bottom" />
+                    <Setter Property="Margin" Value="15,0,15,0" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ChartAreaStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type Panel}">
+                    <Setter Property="MinWidth" Value="100" />
+                    <Setter Property="MinHeight" Value="75" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="PlotAreaStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type Grid}">
+                    <Setter Property="Background" Value="Transparent" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type charting:Chart}">
+                    <Border
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <visualization:Title
+                                Grid.Column="1"
+                                Content="{TemplateBinding Title}"
+                                Style="{TemplateBinding TitleStyle}" />
+                            <Grid Grid.Row="1" Margin="0,15,0,15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <visualization:Legend
+                                    x:Name="Legend"
+                                    Grid.Column="1"
+                                    Header="{TemplateBinding LegendTitle}"
+                                    Style="{TemplateBinding LegendStyle}" />
+                                <chartingprimitives:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
+                                    <Grid
+                                        x:Name="PlotArea"
+                                        Panel.ZIndex="-1"
+                                        Style="{TemplateBinding PlotAreaStyle}" />
+                                    <Grid
+                                        x:Name="PART_CrosshairContainer"
+                                        Panel.ZIndex="1"
+                                        Background="Transparent"
+                                        Visibility="{TemplateBinding CrosshairVisibility}">
+                                        <Grid x:Name="PART_Crosshair">
+                                            <Line
+                                                x:Name="Vertical"
+                                                Stroke="{DynamicResource ControlBorderColorBrush}"
+                                                X1="{Binding X}"
+                                                X2="{Binding X}"
+                                                Y1="0"
+                                                Y2="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" />
+                                            <Line
+                                                x:Name="Horizontal"
+                                                Stroke="{DynamicResource ControlBorderColorBrush}"
+                                                X1="0"
+                                                X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                                                Y1="{Binding Y}"
+                                                Y2="{Binding Y}" />
+                                        </Grid>
+                                    </Grid>
+                                    <Border
+                                        x:Name="PART_LocationIndicator"
+                                        IsHitTestVisible="False"
+                                        Style="{StaticResource LocationLegendStyle}"
+                                        Visibility="Collapsed">
+                                        <StackPanel
+                                            Margin="5"
+                                            IsHitTestVisible="False"
+                                            Orientation="Horizontal">
+                                            <TextBlock
+                                                FontSize="14"
+                                                IsHitTestVisible="False"
+                                                Text="Tag: " />
+                                            <TextBlock
+                                                FontSize="14"
+                                                FontWeight="Bold"
+                                                IsHitTestVisible="False"
+                                                Text="{Binding Key}" />
+                                            <TextBlock
+                                                FontSize="14"
+                                                IsHitTestVisible="False"
+                                                Text=", Stunden: " />
+                                            <TextBlock
+                                                FontSize="14"
+                                                FontWeight="Bold"
+                                                IsHitTestVisible="False"
+                                                Text="{Binding Value, StringFormat=\{0:F1\}}" />
+                                        </StackPanel>
+                                    </Border>
+                                    <Canvas x:Name="SelectionArea" Background="Transparent" />
+                                    <charting:PieChartLabelArea
+                                        x:Name="LabelArea_PART"
+                                        Margin="10"
+                                        Panel.ZIndex="11"
+                                        SnapsToDevicePixels="True" />
+                                </chartingprimitives:EdgePanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

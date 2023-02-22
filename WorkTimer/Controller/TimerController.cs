@@ -4,7 +4,7 @@ using WorkTimer.Services;
 
 namespace WorkTimer.Controller
 {
-    internal static class TimerController
+    public static class TimerController
     {
         public enum TimerType
         {
@@ -61,6 +61,11 @@ namespace WorkTimer.Controller
                     Data.UnknownTime.Seconds++;
                     break;
             }
+        }
+
+        public static void RunTimer(TimerType type)
+        {
+            RunningTimer = type;
         }
 
         public static void RunBreakTimer()
