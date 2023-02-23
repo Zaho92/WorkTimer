@@ -1,9 +1,11 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converter="clr-namespace:WorkTimer.Converter"
     xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
     xmlns:chartingprimitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=DotNetProjects.DataVisualization.Toolkit"
     xmlns:visualization="clr-namespace:System.Windows.Controls.DataVisualization;assembly=DotNetProjects.DataVisualization.Toolkit">
+    <Converter:DecimalToTimeConverter x:Key="DecimalToTimeConverter" />
     <!--  LocationLegend  -->
     <Style x:Key="LocationLegendStyle" TargetType="{x:Type Border}">
         <Setter Property="Background" Value="{DynamicResource ControlBackgroundColorBrush}" />
@@ -162,6 +164,7 @@
                                     </Grid>
                                     <Border
                                         x:Name="PART_LocationIndicator"
+                                        Panel.ZIndex="2"
                                         IsHitTestVisible="False"
                                         Style="{StaticResource LocationLegendStyle}"
                                         Visibility="Collapsed">
@@ -186,7 +189,7 @@
                                                 FontSize="14"
                                                 FontWeight="Bold"
                                                 IsHitTestVisible="False"
-                                                Text="{Binding Value, StringFormat=\{0:F1\}}" />
+                                                Text="{Binding Value, Converter={StaticResource DecimalToTimeConverter}}" />
                                         </StackPanel>
                                     </Border>
                                     <Canvas x:Name="SelectionArea" Background="Transparent" />

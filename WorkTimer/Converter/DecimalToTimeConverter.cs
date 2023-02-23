@@ -12,7 +12,7 @@ namespace WorkTimer.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is decimal hours)
+            if (value is double hours)
             {
                 TimeSpan timeSpan = TimeSpan.FromHours((double)hours);
                 return string.Format("{0:D2}:{1:mm}", (int)timeSpan.TotalHours, timeSpan);
