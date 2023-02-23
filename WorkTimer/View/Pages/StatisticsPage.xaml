@@ -12,6 +12,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <Page.Resources />
     <Grid Margin="12">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -75,25 +76,24 @@
                         </charting:LinearAxis.GridLineStyle>
                     </charting:LinearAxis>
                 </charting:Chart.Axes>
-                <charting:StackedColumnSeries
-                    Background="Transparent"
-                    BorderBrush="Transparent"
+                <charting:ColumnSeries
+                    Title="Arbeitszeit"
                     BorderThickness="0"
-                    IsHitTestVisible="False"
+                    DependentValuePath="Value.WorkTime.SecondsAsHours"
+                    IndependentValuePath="Key"
+                    IsHitTestVisible="true"
                     IsManipulationEnabled="False"
-                    SelectionMode="None"
-                    ToolTipService.ToolTip="{x:Null}">
-                    <charting:SeriesDefinition
-                        Title="Pausenzeit"
-                        DependentValuePath="Value.BreakTime.SecondsAsHours"
-                        IndependentValuePath="Key"
-                        ItemsSource="{Binding ChartData}" />
-                    <charting:SeriesDefinition
-                        Title="Arbeitszeit"
-                        DependentValuePath="Value.WorkTime.SecondsAsHours"
-                        IndependentValuePath="Key"
-                        ItemsSource="{Binding ChartData}" />
-                </charting:StackedColumnSeries>
+                    ItemsSource="{Binding ChartData}"
+                    ToolTipService.ToolTip="Value.WorkTime.SecondsAsTimeString" />
+                <charting:ColumnSeries
+                    Title="Pausenzeit"
+                    BorderThickness="0"
+                    DependentValuePath="Value.BreakTime.SecondsAsHours"
+                    IndependentValuePath="Key"
+                    IsHitTestVisible="true"
+                    IsManipulationEnabled="False"
+                    ItemsSource="{Binding ChartData}"
+                    ToolTipService.ToolTip="Value.BreakTime.SecondsAsTimeString" />
             </charting:Chart>
         </Grid>
         <StackPanel
