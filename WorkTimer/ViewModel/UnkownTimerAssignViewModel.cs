@@ -50,7 +50,7 @@ namespace WorkTimer.ViewModel
         }
 
         [RelayCommand]
-        public void TimeSpanValueChanged()
+        public void NumericValueChanged()
         {
             UpdateUnknownTime();
         }

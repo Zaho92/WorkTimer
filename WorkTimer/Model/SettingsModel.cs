@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using WorkTimer.Controller;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WorkTimer.Model
 {
@@ -14,6 +16,13 @@ namespace WorkTimer.Model
     {
         [ObservableProperty]
         private string _dataSavePath;
+        
+        public string LasValidDataSavePath;
+
+        partial void OnDataSavePathChanged(string value)
+        {
+            DataControllers.SettingsDataController.HandleDataPathChange(value);
+        }
 
         [ObservableProperty]
         private decimal _weeklyWorkHours;
@@ -41,8 +50,20 @@ namespace WorkTimer.Model
 
         public SettingsModel()
         {
+            SetStandardValues(false);
+        }
+
+        public void SetStandardValues(bool askBeforeChange = true)
+        {
+            if (askBeforeChange)
+            {
+                string header = "Einstellungen zurücksetzen";
+                string message = $"Das zurücksetzten der Einstellungen kann nciht rückgängig gemacht werden.\nMöchten Sie wirklich alle Einstellungen zurücksetzten?";
+                MessageController.ShowMessageWindow(MessageController.MessageType.YesNo, header, message);
+            }
             // Standard Values
             DataSavePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\JobTimer\Data\";
+            LasValidDataSavePath = DataSavePath;
             WeeklyWorkHours = 40;
             WorkingDays = new Dictionary<DayOfWeek, bool>()
             {

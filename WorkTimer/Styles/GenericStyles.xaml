@@ -9,10 +9,11 @@
         <ResourceDictionary Source="ControlStyles/ListBoxStyle.xaml" />
         <ResourceDictionary Source="ControlStyles/MenuStyle.xaml" />
         <ResourceDictionary Source="ControlStyles/RadioButtonStyle.xaml" />
-        <!--<ResourceDictionary Source="ControlStyles/ScrollViewerStyle.xaml" />-->
+        <ResourceDictionary Source="ControlStyles/ScrollViewerStyle.xaml" />
         <ResourceDictionary Source="ControlStyles/TextBlockStyle.xaml" />
         <ResourceDictionary Source="ControlStyles/TextBoxStyle.xaml" />
         <ResourceDictionary Source="ControlStyles/ToggleButtonStyle.xaml" />
+        <ResourceDictionary Source="ControlStyles/ToolTipStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource MyButtonStyle}" TargetType="{x:Type Button}" />
@@ -23,8 +24,10 @@
     <Style BasedOn="{StaticResource MyMenuItemStyle}" TargetType="{x:Type MenuItem}" />
     <Style BasedOn="{StaticResource MyMenuStyle}" TargetType="{x:Type Menu}" />
     <Style BasedOn="{StaticResource MyRadioButtonStyle}" TargetType="{x:Type RadioButton}" />
-    <!--<Style BasedOn="{StaticResource MyScrollViewerStyle}" TargetType="{x:Type ScrollViewer}" />-->
+    <Style BasedOn="{StaticResource MyScrollViewerStyle}" TargetType="{x:Type ScrollViewer}" />
+    <Style BasedOn="{StaticResource MyScrollBarStyle}" TargetType="{x:Type ScrollBar}" />
     <Style BasedOn="{StaticResource MyTextBlockStyle}" TargetType="{x:Type TextBlock}" />
     <Style BasedOn="{StaticResource MyTextBoxStyle}" TargetType="{x:Type TextBox}" />
     <Style BasedOn="{StaticResource MyToggleButtonStyle}" TargetType="{x:Type ToggleButton}" />
+    <Style BasedOn="{StaticResource MyToolTipStyle}" TargetType="{x:Type ToolTip}" />
 </ResourceDictionary>

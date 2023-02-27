@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WorkTimer.Model;
 using WorkTimer.ViewModel;
 
 namespace WorkTimer.View.Pages
@@ -24,7 +25,7 @@ namespace WorkTimer.View.Pages
         public SettingsPage()
         {
             InitializeComponent();
-            DataContext = new SettingsViewModel();
+            DataContext = Data.Settings;
         }
     }
 }

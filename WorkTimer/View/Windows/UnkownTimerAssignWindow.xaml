@@ -79,17 +79,16 @@
                 Margin="0,12,6,12"
                 HorizontalAlignment="Stretch"
                 Orientation="Vertical">
-                <TextBlock
-                    FontSize="14"
-                    FontWeight="Bold"
-                    Text="Arbeitszeit" />
-                <controls:TimeSpanUpDown MaxTimeSpanValue="{Binding MaxWorkTimeAssignment, Mode=OneWay}" TimeSpanValue="{Binding AssignedWorkTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <controls:ValueUpDown
+                    Title="Arbeitszeit"
+                    MaxValue="{Binding MaxWorkTimeAssignment, Mode=OneWay}"
+                    Value="{Binding AssignedWorkTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <Behaviors:Interaction.Triggers>
-                        <Behaviors:EventTrigger EventName="TimeSpanValueChanged">
-                            <Behaviors:InvokeCommandAction Command="{Binding TimeSpanValueChangedCommand}" />
+                        <Behaviors:EventTrigger EventName="ValueChanged">
+                            <Behaviors:InvokeCommandAction Command="{Binding NumericValueChangedCommand}" />
                         </Behaviors:EventTrigger>
                     </Behaviors:Interaction.Triggers>
-                </controls:TimeSpanUpDown>
+                </controls:ValueUpDown>
             </StackPanel>
             <StackPanel
                 Grid.Row="0"
@@ -97,17 +96,16 @@
                 Margin="6,12,0,12"
                 HorizontalAlignment="Stretch"
                 Orientation="Vertical">
-                <TextBlock
-                    FontSize="14"
-                    FontWeight="Bold"
-                    Text="Pausenzeit" />
-                <controls:TimeSpanUpDown MaxTimeSpanValue="{Binding MaxBreakTimeAssignment, Mode=OneWay}" TimeSpanValue="{Binding AssignedBreakTime, Mode=TwoWay}">
+                <controls:ValueUpDown
+                    Title="Pausenzeit"
+                    MaxValue="{Binding MaxBreakTimeAssignment, Mode=OneWay}"
+                    Value="{Binding AssignedBreakTime, Mode=TwoWay}">
                     <Behaviors:Interaction.Triggers>
-                        <Behaviors:EventTrigger EventName="TimeSpanValueChanged">
-                            <Behaviors:InvokeCommandAction Command="{Binding TimeSpanValueChangedCommand}" />
+                        <Behaviors:EventTrigger EventName="ValueChanged">
+                            <Behaviors:InvokeCommandAction Command="{Binding NumericValueChangedCommand}" />
                         </Behaviors:EventTrigger>
                     </Behaviors:Interaction.Triggers>
-                </controls:TimeSpanUpDown>
+                </controls:ValueUpDown>
             </StackPanel>
             <TextBlock
                 Grid.Row="1"
